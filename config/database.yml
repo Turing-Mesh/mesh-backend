@@ -75,11 +75,11 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
-production:
-  <<: *default
-  database: mesh-backend_production
-  username: mesh-backend
-  password: <%= ENV['MESH-BACKEND_DATABASE_PASSWORD'] %>
+  production:
+    url: <%= ENV['DATABASE_URL'] %>
+
+# production:
+#   <<: *default
+#   database: mesh-backend_production
+#   username: mesh-backend
+#   password: <%= ENV['MESH-BACKEND_DATABASE_PASSWORD'] %>
