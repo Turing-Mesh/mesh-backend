@@ -5,4 +5,6 @@ class User < ApplicationRecord
 
   enum role: ["student", "instructor"]
   has_secure_password
+
+  has_one :user_profile
 end
