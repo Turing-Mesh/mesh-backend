@@ -10,9 +10,16 @@ RSpec.describe ProjectRubric, type: :model do
 
   describe 'validations' do
     it "rubric_category_id is unique to mod, program and project_number" do
-      rubric_1 = create(:project_rubric)
-      # create a test for this, below is not working with mult scopes
-      # should validate_uniqueness_of(:rubric_category_id).scoped_to(:mod, :project_number)
+      category = create(:rubric_category, id: 1)
+      valid_1 = ProjectRubric.new(mod: "1", program: "BE", project_number: "1", rubric_category_id: category.id)
+
+      expect(valid_1.save).to eq(true)
+      invalid_1 = ProjectRubric.new(mod: "1", program: "BE", project_number: "1", rubric_category_id: category.id)
+
+      expect(invalid_1.save).to eq(false)
+      valid_2 = ProjectRubric.new(mod: "1", program: "BE", project_number: "2", rubric_category_id: category.id)
+
+      expect(valid_2.save).to eq(true)
     end
   end
 
