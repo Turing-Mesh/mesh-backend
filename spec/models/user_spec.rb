@@ -11,7 +11,8 @@ RSpec.describe User, type: :model do
     it { should have_secure_password }
   end
 
-  describe 'relationships' do
+  describe "relationships" do
+    it { should have_one :user_profile }
     it {should have_many(:projects).with_foreign_key(:student_id)}
   end
 
