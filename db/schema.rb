@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_142136) do
+ActiveRecord::Schema.define(version: 2021_05_14_230740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "project_feedbacks", force: :cascade do |t|
+    t.bigint "instructor_id"
+    t.bigint "project_id"
+    t.bigint "project_rubric_id"
+    t.float "score"
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["instructor_id"], name: "index_project_feedbacks_on_instructor_id"
+    t.index ["project_id"], name: "index_project_feedbacks_on_project_id"
+    t.index ["project_rubric_id"], name: "index_project_feedbacks_on_project_rubric_id"
+  end
 
   create_table "project_rubrics", force: :cascade do |t|
     t.string "mod"
@@ -23,6 +36,18 @@ ActiveRecord::Schema.define(version: 2021_05_14_142136) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["rubric_category_id"], name: "index_project_rubrics_on_rubric_category_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.string "mod"
+    t.string "program"
+    t.string "instructor_comments"
+    t.string "student_comments"
+    t.bigint "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_projects_on_student_id"
   end
 
   create_table "rubric_categories", force: :cascade do |t|
@@ -40,5 +65,9 @@ ActiveRecord::Schema.define(version: 2021_05_14_142136) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "project_feedbacks", "project_rubrics"
+  add_foreign_key "project_feedbacks", "projects"
+  add_foreign_key "project_feedbacks", "users", column: "instructor_id"
   add_foreign_key "project_rubrics", "rubric_categories"
+  add_foreign_key "projects", "users", column: "student_id"
 end
