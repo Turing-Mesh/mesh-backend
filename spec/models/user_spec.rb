@@ -14,6 +14,7 @@ RSpec.describe User, type: :model do
   describe "relationships" do
     it { should have_one :user_profile }
     it {should have_many(:projects).with_foreign_key(:student_id)}
+    it {should have_many(:project_feedbacks).with_foreign_key(:instructor_id)}
   end
 
   describe "user roles" do
