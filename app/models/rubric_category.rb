@@ -1,5 +1,5 @@
 class RubricCategory < ApplicationRecord
-  has_many :mod_rubrics
+  has_many :project_rubrics
 
   validates_presence_of :name
 end

@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_040236) do
+ActiveRecord::Schema.define(version: 2021_05_14_142136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "mod_rubrics", force: :cascade do |t|
+  create_table "project_rubrics", force: :cascade do |t|
     t.string "mod"
     t.string "program"
     t.string "project_number"
     t.bigint "rubric_category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["rubric_category_id"], name: "index_mod_rubrics_on_rubric_category_id"
+    t.index ["rubric_category_id"], name: "index_project_rubrics_on_rubric_category_id"
   end
 
   create_table "rubric_categories", force: :cascade do |t|
@@ -40,5 +40,5 @@ ActiveRecord::Schema.define(version: 2021_05_14_040236) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "mod_rubrics", "rubric_categories"
+  add_foreign_key "project_rubrics", "rubric_categories"
 end

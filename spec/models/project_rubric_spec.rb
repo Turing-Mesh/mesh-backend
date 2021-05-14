@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ModRubric, type: :model do
+RSpec.describe ProjectRubric, type: :model do
   describe 'validations' do
     it {should validate_presence_of :mod}
     it {should validate_presence_of :program}
@@ -10,7 +10,7 @@ RSpec.describe ModRubric, type: :model do
 
   describe 'validations' do
     it "rubric_category_id is unique to mod, program and project_number" do
-      x = create(:mod_rubric)
+      rubric_1 = create(:project_rubric)
       # create a test for this, below is not working with mult scopes
       # should validate_uniqueness_of(:rubric_category_id).scoped_to(:mod, :project_number)
     end

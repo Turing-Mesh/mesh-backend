@@ -1,4 +1,4 @@
-class ModRubric < ApplicationRecord
+class ProjectRubric < ApplicationRecord
   belongs_to :rubric_category
 
   validates_presence_of :mod, :program, :project_number, :rubric_category_id
