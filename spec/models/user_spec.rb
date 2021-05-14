@@ -11,6 +11,10 @@ RSpec.describe User, type: :model do
     it { should have_secure_password }
   end
 
+  describe 'relationships' do
+    it {should have_many(:projects).with_foreign_key(:student_id)}
+  end
+
   describe "user roles" do
     it "user can be student user" do
       data = {email: "sample@email.com", password: "1234", role: 0}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_142136) do
+ActiveRecord::Schema.define(version: 2021_05_14_221715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 2021_05_14_142136) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["rubric_category_id"], name: "index_project_rubrics_on_rubric_category_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.string "mod"
+    t.string "program"
+    t.string "instructor_comments"
+    t.string "student_comments"
+    t.bigint "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_projects_on_student_id"
   end
 
   create_table "rubric_categories", force: :cascade do |t|
@@ -41,4 +53,5 @@ ActiveRecord::Schema.define(version: 2021_05_14_142136) do
   end
 
   add_foreign_key "project_rubrics", "rubric_categories"
+  add_foreign_key "projects", "users", column: "student_id"
 end

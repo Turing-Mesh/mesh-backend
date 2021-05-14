@@ -5,7 +5,6 @@ RSpec.describe ProjectRubric, type: :model do
     it {should validate_presence_of :mod}
     it {should validate_presence_of :program}
     it {should validate_presence_of :project_number}
-    it {should validate_presence_of :rubric_category_id}
   end
 
   describe 'validations' do
