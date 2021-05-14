@@ -5,6 +5,15 @@ RSpec.describe ModRubric, type: :model do
     it {should validate_presence_of :mod}
     it {should validate_presence_of :program}
     it {should validate_presence_of :project_number}
+    it {should validate_presence_of :rubric_category_id}
+  end
+
+  describe 'validations' do
+    it "rubric_category_id is unique to mod, program and project_number" do
+      x = create(:mod_rubric)
+      # create a test for this, below is not working with mult scopes
+      # should validate_uniqueness_of(:rubric_category_id).scoped_to(:mod, :project_number)
+    end
   end
 
   describe 'relationships' do
