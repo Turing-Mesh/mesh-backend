@@ -56,6 +56,20 @@ ActiveRecord::Schema.define(version: 2021_05_14_230740) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_profiles", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "current_mod"
+    t.string "program"
+    t.string "starting_cohort"
+    t.string "current_cohort"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_profiles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -70,4 +84,5 @@ ActiveRecord::Schema.define(version: 2021_05_14_230740) do
   add_foreign_key "project_feedbacks", "users", column: "instructor_id"
   add_foreign_key "project_rubrics", "rubric_categories"
   add_foreign_key "projects", "users", column: "student_id"
+  add_foreign_key "user_profiles", "users"
 end
