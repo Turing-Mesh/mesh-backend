@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe RubricCategory, type: :model do
   describe 'validations' do
-    it { should validate_presence_of :name }
+    it {should validate_presence_of :name}
+  end
+
+  describe 'relationships' do
+    it {should have_many :mod_rubrics}
   end
 end
