@@ -8,5 +8,6 @@ RSpec.describe Project, type: :model do
 
   describe 'relationships' do
     it {should belong_to(:user).with_foreign_key(:student_id)}
+    it {should have_many :project_feedbacks}
   end
 end
