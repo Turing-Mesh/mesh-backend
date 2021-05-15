@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_15_003041) do
+ActiveRecord::Schema.define(version: 2021_05_15_205441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,19 @@ ActiveRecord::Schema.define(version: 2021_05_15_003041) do
     t.index ["rubric_category_id"], name: "index_project_rubrics_on_rubric_category_id"
   end
 
+  create_table "project_templates", force: :cascade do |t|
+    t.bigint "rubric_template_id"
+    t.string "name"
+    t.string "mod"
+    t.string "program"
+    t.string "project_number"
+    t.integer "project_type"
+    t.boolean "is_final", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rubric_template_id"], name: "index_project_templates_on_rubric_template_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.string "mod"
@@ -59,6 +72,11 @@ ActiveRecord::Schema.define(version: 2021_05_15_003041) do
 
   create_table "rubric_categories", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rubric_templates", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -90,6 +108,7 @@ ActiveRecord::Schema.define(version: 2021_05_15_003041) do
   add_foreign_key "project_feedbacks", "projects"
   add_foreign_key "project_feedbacks", "users", column: "instructor_id"
   add_foreign_key "project_rubrics", "rubric_categories"
+  add_foreign_key "project_templates", "rubric_templates"
   add_foreign_key "projects", "users", column: "student_id"
   add_foreign_key "user_profiles", "users"
 end

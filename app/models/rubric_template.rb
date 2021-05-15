@@ -1,0 +1,2 @@
+class RubricTemplate < ApplicationRecord
+end
