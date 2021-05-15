@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :project_feedback do
     user
     student_project
-    project_rubric
+    rubric_template_category
     sequence :score do |n|
       n + 0.5
     end

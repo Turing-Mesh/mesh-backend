@@ -7,7 +7,7 @@ RSpec.describe ProjectFeedback, type: :model do
 
   describe 'relationships' do
     it {should belong_to(:student_project).with_foreign_key(:project_id)}
-    it {should belong_to :project_rubric}
+    it {should belong_to :rubric_template_category}
     it {should belong_to(:user).with_foreign_key(:instructor_id)}
   end
 end
