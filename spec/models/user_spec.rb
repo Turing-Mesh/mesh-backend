@@ -15,6 +15,8 @@ RSpec.describe User, type: :model do
     it { should have_one :user_profile }
     it {should have_many(:projects).with_foreign_key(:student_id)}
     it {should have_many(:project_feedbacks).with_foreign_key(:instructor_id)}
+    it {should have_many(:instructors).through(:instructor_users)}
+    it {should have_many(:students).through(:student_users)}
   end
 
   describe "user roles" do
@@ -53,6 +55,20 @@ RSpec.describe User, type: :model do
       user.update(active: false)
       expect(user.active).to eq(false)
       expect(user.active).to_not eq(true)
+    end
+  end
+
+  describe 'email format validation' do
+    it "creates a user with a valid email format" do
+      user = User.create!(email: 'haegonorious@email.com', password: 'password', role: :student)
+
+      expect(user.email).to eq('haegonorious@email.com')
+    end
+
+    it "should not create a user with a invalid email format" do
+      user = User.new(email: 'bazzinni.email.com', password: 'password', role: :student)
+
+      expect(user.save).to eq(false)
     end
   end
 end
