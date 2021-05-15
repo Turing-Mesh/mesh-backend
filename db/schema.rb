@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_15_215358) do
+ActiveRecord::Schema.define(version: 2021_05_15_220528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,14 +70,13 @@ ActiveRecord::Schema.define(version: 2021_05_15_215358) do
   end
 
   create_table "student_projects", force: :cascade do |t|
-    t.string "name"
-    t.string "mod"
-    t.string "program"
     t.string "instructor_comments"
     t.string "student_comments"
     t.bigint "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "project_template_id"
+    t.index ["project_template_id"], name: "index_student_projects_on_project_template_id"
     t.index ["student_id"], name: "index_student_projects_on_student_id"
   end
 
@@ -109,6 +108,7 @@ ActiveRecord::Schema.define(version: 2021_05_15_215358) do
   add_foreign_key "project_feedbacks", "users", column: "instructor_id"
   add_foreign_key "project_rubrics", "rubric_categories"
   add_foreign_key "project_templates", "rubric_templates"
+  add_foreign_key "student_projects", "project_templates"
   add_foreign_key "student_projects", "users", column: "student_id"
   add_foreign_key "user_profiles", "users"
 end

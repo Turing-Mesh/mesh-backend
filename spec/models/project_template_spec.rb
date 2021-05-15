@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe ProjectTemplate, type: :model do
   describe "relationships" do
     it { should belong_to :rubric_template }
+    it { should have_many :student_projects }
   end
 
   describe "validations" do
