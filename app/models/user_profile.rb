@@ -8,6 +8,6 @@ class UserProfile < ApplicationRecord
             :current_cohort,
             presence: true
 
-  enum status: ["enrolled", "graduated", "withdrawn", "on_leave"]
+  enum status: [:enrolled, :graduated, :withdrawn, :on_leave]
 
 end
