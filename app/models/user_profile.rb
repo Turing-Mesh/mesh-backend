@@ -4,8 +4,6 @@ class UserProfile < ApplicationRecord
             :last_name,
             :program,
             :current_mod,
-            :starting_cohort,
-            :current_cohort,
             presence: true
 
   enum status: [:enrolled, :graduated, :withdrawn, :on_leave]

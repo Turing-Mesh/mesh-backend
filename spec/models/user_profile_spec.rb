@@ -11,8 +11,6 @@ RSpec.describe UserProfile, type: :model do
     it { should validate_presence_of :last_name }
     it { should validate_presence_of :program }
     it { should validate_presence_of :current_mod }
-    it { should validate_presence_of :starting_cohort }
-    it { should validate_presence_of :current_cohort }
     it { should define_enum_for :status }
   end
 

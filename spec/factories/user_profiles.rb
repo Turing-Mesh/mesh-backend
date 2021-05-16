@@ -5,8 +5,8 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     current_mod { "#{Faker::Number.between(from: 1, to: 4)}" }
     program { "BE" }
-    starting_cohort { "2011" }
-    current_cohort { "2011" }
-    status { Faker::Number.between(from: 0, to: 3) }
+    starting_cohort { nil }
+    current_cohort { nil }
+    status { nil }
   end
 end
