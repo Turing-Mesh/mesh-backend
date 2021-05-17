@@ -69,7 +69,9 @@
             "program": "BE",
             "project_number": "2",
             "project_type": "paired",
-            "is_final": false,
+            "is_final_project": false,
+            "instructor_comments": "Some real awesome stuff.",
+            "student_comments": null,
             "project_feedback": [
               {
                 "id": "101",

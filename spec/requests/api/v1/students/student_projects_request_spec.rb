@@ -50,7 +50,7 @@ describe 'Student projects request' do
     it "returns a single student's projects and feedback for matching mod when given valid data" do
       mod = 2
 
-      get "/api/v1/students/:student_id/student_projects?mod=#{mod}"
+      get "/api/v1/students/#{@student.id}/student_projects?mod=#{mod}"
 
       json = JSON.parse(response.body, symbolize_names:true)
 
