@@ -11,7 +11,6 @@ class StudentProject < ApplicationRecord
       project_templates.mod,
       project_templates.program,
       project_templates.project_number,
-      project_templates.project_type,
       project_templates.is_final,
       project_templates.rubric_template_id')
     .joins(:project_template)
