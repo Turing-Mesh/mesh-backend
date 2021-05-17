@@ -22,7 +22,7 @@ The request provides the projects for a valid matching student id and mod (sent 
   * Mod query parameter must be included and have an integer value between 0-4. If the mod query parameter is missing, or is an invalid value an error will be sent (see error section).
 * Data is returned in ascending order by project number.
 
-  Sample json response for a student with 2 projects
+  Example json response
 
   ```json
   {
