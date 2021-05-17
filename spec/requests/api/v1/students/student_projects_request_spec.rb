@@ -22,8 +22,8 @@ describe 'Student projects request' do
       mod1_rubric.rubric_categories << [testing, oop, code_quality, completion]
       mod2_rubric.rubric_categories << [testing, oop, code_quality, completion, active_record]
       # 3 project templates, 1 for each project above
-      project_template_1 = create(:project_template, mod: "1", rubric_template_id: mod1_rubric.id)
-      project_template_2 = create(:project_template, mod: "2", rubric_template_id: mod2_rubric.id)
+      project_template_1 = create(:project_template, mod: "1", project_number: "4", rubric_template_id: mod1_rubric.id)
+      project_template_2 = create(:project_template, mod: "2", project_number: "4", rubric_template_id: mod2_rubric.id)
       project_template_3 = create(:project_template, mod: "2", project_number: "4", is_final: true, rubric_template_id: mod2_rubric.id)
       project_template_4 = create(:project_template, mod: "3", project_number: "1", rubric_template_id: mod2_rubric.id)
       # 3 projects, 1 for mod 1 and 2 for mod 2
@@ -46,8 +46,25 @@ describe 'Student projects request' do
       feedback_13 = create(:project_feedback, instructor_id: @instructor.id, project_id: project_3.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[3].id)
       feedback_14 = create(:project_feedback, instructor_id: @instructor.id, project_id: project_3.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[4].id)
     end
-    it "returns a single student's projects and feedback for matching mod when given valid data" do
 
+    it "returns a single student's projects and feedback for matching mod when given valid data" do
+      mod = 2
+
+      get "/api/v1/students/:student_id/student_projects?mod=#{mod}"
+
+      json = JSON.parse(response.body, symbolize_names:true)
+
+      expect(response).to be_successful
+      expect(json).to be_a(Hash)
+      expect(json[:data]).to be_a(Hash)
+      expect(json[:data][:id]).to be_a(String)
+      expect(json[:data][:id]).to eq(@student.id)
+      expect(json[:data][:type]).to eq("projects")
+      expect(json[:data][:attributes]).to be_a(Hash)
+      expect(json[:data][:attributes][:mod]).to be_a(String)
+      expect(json[:data][:attributes][:mod]).to eq("2")
+      expect(json[:data][:attributes][:student_projects]).to be_an(Array)
+      expect(json[:data][:attributes][:student_projects].count).to eq(2)
     end
   end
 end
