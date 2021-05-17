@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :project_template do
-    rubric_template
+    rubric_template_id {nil}
     sequence :name do |n|
       "Awesome Project #{n + 1}"
     end

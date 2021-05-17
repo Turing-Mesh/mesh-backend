@@ -8,7 +8,9 @@ RSpec.describe RubricTemplateCategory, type: :model do
 
   describe 'validations' do
     it 'validates rubric_category_id is unique for rubric_template_id' do
-      create(:rubric_template_category)
+      rubric_template = create(:rubric_template)
+      rubric_category = create(:rubric_category)
+      create(:rubric_template_category, rubric_template_id: rubric_template.id, rubric_category_id: rubric_category.id)
       should validate_uniqueness_of(:rubric_category_id).scoped_to(:rubric_template_id)
     end
   end

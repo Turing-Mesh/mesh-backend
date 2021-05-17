@@ -51,14 +51,16 @@ RSpec.describe ProjectTemplate, type: :model do
 
   describe "project template can be final or not final" do
     it "project template is not final by defaut" do
-      project_template = create(:project_template)
+      rubric_template = create(:rubric_template)
+      project_template = create(:project_template, rubric_template_id: rubric_template.id)
       expect(project_template).to be_valid
       expect(project_template.is_final).to eq(false)
       expect(project_template.is_final).to_not eq(true)
     end
 
     it "project template can be final" do
-      project_template = create(:project_template, is_final: true)
+      rubric_template = create(:rubric_template)
+      project_template = create(:project_template, rubric_template_id: rubric_template.id, is_final: true)
       expect(project_template).to be_valid
       expect(project_template.is_final).to eq(true)
       expect(project_template.is_final).to_not eq(false)
