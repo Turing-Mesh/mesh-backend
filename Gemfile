@@ -28,16 +28,18 @@ gem 'faraday'
 gem 'json'
 gem 'fast_jsonapi'
 gem 'figaro'
+gem 'hirb'
+gem 'factory_bot_rails'
+gem 'faker'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
-  gem 'factory_bot_rails'
-  gem 'faker'
+ 
   gem 'rspec-rails'
   gem 'capybara'
   gem 'simplecov'
