@@ -10,4 +10,11 @@ before_install:
 script:
 - bundle exec rails db:{create,migrate} RAILS_ENV=test
 - bundle exec rspec
-
+deploy:
+  provider: heroku
+  api_key:
+    secure: Gr9ukaobxw2b54SUJWFQOaj5pqNIRsDDtSVl5W66V4wMlGCeEgjNpSIKonHEIpisW3tZsVi1UU4QypahaMIEZRWEc1nbO+txkzaoBw3qxxsvFvBputNa5pUc6Wk2LMd5grnEZtbSzV0ItvKMihfPa0jUaSxGneH/bNRKfW9Pg9myXefxKk7YvHf6kQnSoh6AMjtf8ziN3/0skkgFeVIccaDWiTX8MDZj0ZanGsCV+tLEFpcpraCjCs1stY3Q9WHSQw9m2gRTPF7hCQfpGqCWM5KqMZxHQ3DH9yZ2RAWalURwL8DnDAPjqQxNGbMUUqI6k7FwVzqTx/No6IUCnWAzLna4zfzsc4CLiuOWsjR03P/PsCUT8L0fbQmyuZ1EhHoAvNuvlkiyd8TCdgxwGLwuYyRm2TDaD4+kejb/FEeHzPkkI3ZfrdsKeXyupCAbgieLPpNqg+ptrM4OmJHkNlyDN0tT5i+gkIZAMP+++h/z9pwJVumB+yXHkG0+ovxgmPAY2lCDexlByVC3e4wPQ1GrbjiFcNEz1kmPDCTf8QMQSU5Zo8NfjsXa4A/6L6Sh7w+NabZ1xSEl0ndLt08ckyFHEAFjtSEnd0Q0CFOR6/0MRnjMIR/jUrjeobUnnF55eNIR9a9mS/9q93tl3726g9E8M58vSzK3JO+XBheLBCuOVIM=
+  app: shrouded-citadel-55795
+  on:
+    repo: Turing-Mesh/mesh-backend
+  skip_cleanup: 'true'
