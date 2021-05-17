@@ -8,6 +8,7 @@
 | PATCH | /api/v1/students/:student_id/student_projects/:id | Update student's project with personal comments | [json](#students-update-project) |
 | GET | /api/v1/instructors/:instructor_id/instructor_students?mod=1 | Get all of the student names and ids for instructor's current mod | [json](#instructor-module-students) |
 | POST | /api/v1/instructors/:instructor_id/instructor_students/search | Search for a single student's project information, response is same as students-project-by-mod (we need first and last name to search by in post body request)| [json](#instructor-students-search) |
+| POST | /api/v1/student_projects | Create student_project and related project_feedback records | [json](#instructor-create-project-feedback) |
 | POST | /api/v1/users | Registration new user  | [json](#user-registration) |
 | POST | /api/v1/sessions | Login a user | [json](#sessions-create) |
 | ERROR | errors | Error handling for requests | [json](#error-handling) |
@@ -15,7 +16,7 @@
 ## JSON Responses
 
 ### Student Projects By Mod
-`/api/v1/students/:student_id/student_projects?mod=1`
+`GET /api/v1/students/:student_id/student_projects?mod=1`
 
 The request provides the projects for a valid matching student id and mod (sent as a query parameter).
 * __Required__
@@ -109,6 +110,53 @@ The request provides the projects for a valid matching student id and mod (sent 
     }
   }
   ```
+
+### Instructor Create Project Feedback
+`POST /api/v1/student_projects`
+
+The request creates a student project record and related project feedback records for a valid matching instructor id, student id and project template id.
+* __Required__
+
+  The following fields are required in the post body request. If any required fields are missing or include invalid data an error will be returned (see [error handling](#error-handling)).
+  * instructor_id = integer
+  * student_id = integer
+  * project_template_id = integer
+  * rubric_template_category_id = integer
+  * score = float
+
+  ```json
+  {
+    "instructor_id": 10,
+    "student_id": 201,
+    "project_template_id": 16,
+    "instructor_comments": "Some real good stuff.",
+    "project_feedback": [
+      {
+        "rubric_template_category_id": 3,
+        "score": 4.0,
+        "comment": "Your awesomeness is shining through! It's so bright I need some shades."
+      },
+      {
+        "rubric_template_category_id": 4,
+        "score": 3.0,
+        "comment": null
+      },
+      {
+        "rubric_template_category_id": 5,
+        "score": 2.5,
+        "comment": null
+      },
+      {
+        "rubric_template_category_id": 6,
+        "score": 3.0,
+        "comment": null
+      }
+    ]
+  }
+  ```
+
+  The response is the same as the [Student Projects By Mod](#student-projects-by-mod).
+
 ## Error Handling
 
 ### Sad Path Response (no data matches query)
