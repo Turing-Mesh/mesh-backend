@@ -6,6 +6,7 @@ RSpec.describe RubricCategory, type: :model do
   end
 
   describe 'relationships' do
-    it {should have_many :project_rubrics}
+    it {should have_many :rubric_template_categories}
+    it {should have_many(:rubric_templates).through(:rubric_template_categories)}
   end
 end

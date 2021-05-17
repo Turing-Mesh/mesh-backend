@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :projects, foreign_key: :student_id
+  has_many :student_projects, foreign_key: :student_id
   has_many :project_feedbacks, foreign_key: :instructor_id
 
   has_many  :instructor_users,
