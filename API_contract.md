@@ -7,19 +7,19 @@
 | GET | /api/v1/students/:student_id/student_projects?mod=1 | Get all of the project feedback for single student and a single mod | [json](#student-projects-by-mod) |
 | PATCH | /api/v1/students/:student_id/student_projects/:id | Update student's project with personal comments | [json](#students-update-project) |
 | GET | /api/v1/instructors/:instructor_id/instructor_students?mod=1 | Get all of the student names and ids for instructor's current mod | [json](#instructor-module-students) |
-| POST | /api/v1/instructors/:instructor_id/instructor_students/search | Search for a single student's project information, response is same as students-project-by-mod (we need first, last, instructor_id and mod in post body request)| [json](#instructor-students-search) |
+| POST | /api/v1/instructors/:instructor_id/instructor_students/search | Search for a single student's project information, response is same as students-project-by-mod (we need first and last name to search by in post body request)| [json](#instructor-students-search) |
 | POST | /api/v1/users | Registration new user  | [json](#user-registration) |
 | POST | /api/v1/sessions | Login a user | [json](#sessions-create) |
 | ERROR | errors | Error handling for requests | [json](#error-handling) |
 
 ## JSON Responses
 
-## Student Projects By Mod
+### Student Projects By Mod
 `/api/v1/students/:student_id/student_projects?mod=1`
 
 The request provides the projects for a valid matching student id and mod (sent as a query parameter).
 * __Required__
-  * Mod query parameter must be included and have an integer value between 0-4. If the mod query parameter is missing, or is an invalid value an error will be sent (see error section).
+  * Mod query parameter must be included and have an integer value between 0-4. If the mod query parameter is missing, or is an invalid value an error is sent (see [error handling](#error-handling)).
 * Data is returned in ascending order by project number.
 
   Example json response

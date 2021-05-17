@@ -15,8 +15,11 @@ RSpec.describe UserProfile, type: :model do
   end
 
   describe "user_profile status" do
+    before :each do
+      @user = create(:user)
+    end
     it "user_profile can be enrolled" do
-      user_profile = create(:user_profile, status: 0)
+      user_profile = create(:user_profile, status: 0, user_id: @user.id)
       expect(user_profile).to be_valid
       expect(user_profile.status).to eq("enrolled")
       expect(user_profile.status).to_not eq("graduated")
@@ -25,7 +28,7 @@ RSpec.describe UserProfile, type: :model do
     end
 
     it "user_profile can be graduated" do
-      user_profile = create(:user_profile, status: 1)
+      user_profile = create(:user_profile, status: 1, user_id: @user.id)
       expect(user_profile).to be_valid
       expect(user_profile.status).to eq("graduated")
       expect(user_profile.status).to_not eq("enrolled")
@@ -34,7 +37,7 @@ RSpec.describe UserProfile, type: :model do
     end
 
     it "user_profile can be withdrawn" do
-      user_profile = create(:user_profile, status: 2)
+      user_profile = create(:user_profile, status: 2, user_id: @user.id)
       expect(user_profile).to be_valid
       expect(user_profile.status).to eq("withdrawn")
       expect(user_profile.status).to_not eq("graduated")
@@ -43,7 +46,7 @@ RSpec.describe UserProfile, type: :model do
     end
 
     it "user_profile can be on_leave" do
-      user_profile = create(:user_profile, status: 3)
+      user_profile = create(:user_profile, status: 3, user_id: @user.id)
       expect(user_profile).to be_valid
       expect(user_profile.status).to eq("on_leave")
       expect(user_profile.status).to_not eq("enrolled")
