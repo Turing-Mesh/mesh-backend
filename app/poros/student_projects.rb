@@ -13,7 +13,7 @@ class StudentProjects
     @name = data[:name]
     @program = data[:program]
     @project_number = data[:project_number]
-    @project_type = data[:project_type]
+    @project_type = data.project_template.project_type
     @is_final_project = data[:is_final]
     @instructor_comments = data[:instructor_comments]
     @student_comments = data[:student_comments]

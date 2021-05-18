@@ -61,6 +61,8 @@ describe StudentProjects, type: :model do
       expect(student_project.program).to eq(@project_template_2.program)
       expect(student_project.project_number).to be_a(String)
       expect(student_project.project_number).to eq(@project_template_2.project_number)
+      expect(student_project.project_type).to be_a(String)
+      expect(student_project.project_type).to eq(@project_template_2.project_type)
       expect(student_project.is_final_project).to be_a(FalseClass).or be_a(TrueClass)
       expect(student_project.is_final_project).to eq(@project_template_2.is_final)
       expect(student_project.instructor_comments).to be_a(String)
