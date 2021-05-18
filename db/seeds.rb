@@ -15,9 +15,7 @@ ActiveRecord::Base.connection.tables.each do |t|
 end
 
 #seed data
-
 # be mod1
-
 student_0 = FactoryBot.create(:user, role: 0)
 student_0_profile = FactoryBot.create(:user_profile, user_id: student_0.id, current_mod: "1", starting_cohort: "2102", current_cohort: "2102", status: 0, program: "BE")
 student_1 = FactoryBot.create(:user, role: 0)
@@ -26,11 +24,9 @@ student_2 = FactoryBot.create(:user, role: 0)
 student_2_profile = FactoryBot.create(:user_profile, user_id: student_2.id, current_mod: "1", starting_cohort: "2102", current_cohort: "2102", status: 0, program: "BE")
 instructor_1 = FactoryBot.create(:user, role: 1)
 instructor_1_profile = FactoryBot.create(:user_profile, user_id: instructor_1.id, current_mod: "1", program: "BE")
-
 mod1_be_1 = FactoryBot.create(:instructor_student, instructor_id: instructor_1.id, student_id: student_0.id)
 mod1_be_2 = FactoryBot.create(:instructor_student, instructor_id: instructor_1.id, student_id: student_1.id)
 mod1_be_3 = FactoryBot.create(:instructor_student, instructor_id: instructor_1.id, student_id: student_2.id)
-
 # fe mod1
 student_3 = FactoryBot.create(:user, role: 0)
 student_3_profile = FactoryBot.create(:user_profile, user_id: student_3.id, current_mod: "1", starting_cohort: "2102", current_cohort: "2102", status: 0, program: "FE")
@@ -40,12 +36,9 @@ student_5 = FactoryBot.create(:user, role: 0)
 student_5_profile = FactoryBot.create(:user_profile, user_id: student_5.id, current_mod: "1", starting_cohort: "2102", current_cohort: "2102", status: 0, program: "FE")
 instructor_2 = FactoryBot.create(:user, role: 1)
 instructor_2_profile = FactoryBot.create(:user_profile, user_id: instructor_2.id, current_mod: "1", program: "BE")
-
 mod1_fe_1 = FactoryBot.create(:instructor_student, instructor_id: instructor_2.id, student_id: student_3.id)
 mod1_fe_2 = FactoryBot.create(:instructor_student, instructor_id: instructor_2.id, student_id: student_4.id)
 mod1_fe_3 = FactoryBot.create(:instructor_student, instructor_id: instructor_2.id, student_id: student_5.id)
-
-
 # be mod2
 student_6 = FactoryBot.create(:user, role: 0)
 student_6_profile = FactoryBot.create(:user_profile, user_id: student_6.id, current_mod: "2", starting_cohort: "2011", current_cohort: "2011", status: 0, program: "BE")
@@ -55,11 +48,9 @@ student_8 = FactoryBot.create(:user, role: 0)
 student_8_profile = FactoryBot.create(:user_profile, user_id: student_8.id, current_mod: "2", starting_cohort: "2011", current_cohort: "2011", status: 0, program: "BE")
 instructor_3 = FactoryBot.create(:user, role: 1)
 instructor_3_profile = FactoryBot.create(:user_profile, user_id: instructor_3.id, current_mod: "2", program: "BE")
-
 mod2_be_1 = FactoryBot.create(:instructor_student, instructor_id: instructor_3.id, student_id: student_6.id)
 mod2_be_2 = FactoryBot.create(:instructor_student, instructor_id: instructor_3.id, student_id: student_7.id)
 mod2_be_3 = FactoryBot.create(:instructor_student, instructor_id: instructor_3.id, student_id: student_8.id)
-
 # fe mod2
 student_9 = FactoryBot.create(:user, role: 0)
 student_9_profile = FactoryBot.create(:user_profile, user_id: student_9.id, current_mod: "2", starting_cohort: "2011", current_cohort: "2011", status: 0, program: "FE")
@@ -69,12 +60,9 @@ student_11 = FactoryBot.create(:user, role: 0)
 student_11_profile = FactoryBot.create(:user_profile, user_id: student_11.id, current_mod: "2", starting_cohort: "2011", current_cohort: "2011", status: 0, program: "FE")
 instructor_4 = FactoryBot.create(:user, role: 1)
 instructor_4_profile = FactoryBot.create(:user_profile, user_id: instructor_4.id, current_mod: "2", program: "BE")
-
 mod2_fe_1 = FactoryBot.create(:instructor_student, instructor_id: instructor_4.id, student_id: student_9.id)
 mod2_fe_2 = FactoryBot.create(:instructor_student, instructor_id: instructor_4.id, student_id: student_10.id)
 mod2_fe_3 = FactoryBot.create(:instructor_student, instructor_id: instructor_4.id, student_id: student_11.id)
-
-
 # be mod3
 student_12 = FactoryBot.create(:user, role: 0)
 student_12_profile = FactoryBot.create(:user_profile, user_id: student_12.id, current_mod: "3", starting_cohort: "2010", current_cohort: "2010", status: 0, program: "BE")
@@ -84,11 +72,9 @@ student_14 = FactoryBot.create(:user, role: 0)
 student_14_profile = FactoryBot.create(:user_profile, user_id: student_14.id, current_mod: "3", starting_cohort: "2010", current_cohort: "2010", status: 0, program: "BE")
 instructor_5 = FactoryBot.create(:user, role: 1)
 instructor_5_profile = FactoryBot.create(:user_profile, user_id: instructor_5.id, current_mod: "3", program: "BE")
-
 mod3_be_1 = FactoryBot.create(:instructor_student, instructor_id: instructor_5.id, student_id: student_12.id)
 mod3_be_2 = FactoryBot.create(:instructor_student, instructor_id: instructor_5.id, student_id: student_13.id)
 mod3_be_3 = FactoryBot.create(:instructor_student, instructor_id: instructor_5.id, student_id: student_14.id)
-
 # fe mod3
 student_15 = FactoryBot.create(:user, role: 0)
 student_15_profile = FactoryBot.create(:user_profile, user_id: student_15.id, current_mod: "3", starting_cohort: "2010", current_cohort: "2010", status: 0, program: "FE")
@@ -98,14 +84,9 @@ student_17 = FactoryBot.create(:user, role: 0)
 student_17_profile = FactoryBot.create(:user_profile, user_id: student_17.id, current_mod: "3", starting_cohort: "2010", current_cohort: "2010", status: 0, program: "FE")
 instructor_6 = FactoryBot.create(:user, role: 1)
 instructor_6_profile = FactoryBot.create(:user_profile, user_id: instructor_6.id, current_mod: "3", program: "BE")
-
 mod3_fe_1 = FactoryBot.create(:instructor_student, instructor_id: instructor_6.id, student_id: student_15.id)
 mod3_fe_2 = FactoryBot.create(:instructor_student, instructor_id: instructor_6.id, student_id: student_16.id)
 mod3_fe_3 = FactoryBot.create(:instructor_student, instructor_id: instructor_6.id, student_id: student_17.id)
-
-
-
-
 #mod4
 student_18 = FactoryBot.create(:user, role: 0)
 student_18_profile = FactoryBot.create(:user_profile, user_id: student_18.id, current_mod: "4", starting_cohort: "2008", current_cohort: "2008", status: 0, program: "BE")
@@ -115,11 +96,9 @@ student_20 = FactoryBot.create(:user, role: 0)
 student_20_profile = FactoryBot.create(:user_profile, user_id: student_20.id, current_mod: "4", starting_cohort: "2008", current_cohort: "2008", status: 0, program: "BE")
 instructor_7 = FactoryBot.create(:user, role: 1)
 instructor_7_profile = FactoryBot.create(:user_profile, user_id: instructor_5.id, current_mod: "4", program: "BE")
-
 mod4_be_1 = FactoryBot.create(:instructor_student, instructor_id: instructor_7.id, student_id: student_18.id)
 mod4_be_2 = FactoryBot.create(:instructor_student, instructor_id: instructor_7.id, student_id: student_19.id)
 mod4_be_3 = FactoryBot.create(:instructor_student, instructor_id: instructor_7.id, student_id: student_20.id)
-
 student_21 = FactoryBot.create(:user, role: 0)
 student_21_profile = FactoryBot.create(:user_profile, user_id: student_21.id, current_mod: "4", starting_cohort: "2008", current_cohort: "2008", status: 0, program: "FE")
 student_22 = FactoryBot.create(:user, role: 0)
@@ -128,14 +107,10 @@ student_23 = FactoryBot.create(:user, role: 0)
 student_23_profile = FactoryBot.create(:user_profile, user_id: student_23.id, current_mod: "4", starting_cohort: "2008", current_cohort: "2008", status: 0, program: "FE")
 instructor_8 = FactoryBot.create(:user, role: 1)
 instructor_8_profile = FactoryBot.create(:user_profile, user_id: instructor_8.id, current_mod: "4", program: "BE")
-
 mod4_fe_1 = FactoryBot.create(:instructor_student, instructor_id: instructor_8.id, student_id: student_15.id)
 mod4_fe_2 = FactoryBot.create(:instructor_student, instructor_id: instructor_8.id, student_id: student_16.id)
 mod4_fe_3 = FactoryBot.create(:instructor_student, instructor_id: instructor_8.id, student_id: student_17.id)
-
-
 # rubric categories
-#
 testing = FactoryBot.create(:rubric_category, name: "Testing")
 tdd = FactoryBot.create(:rubric_category, name: "Test Driven Development")
 testing_and_debugging = FactoryBot.create(:rubric_category, name: "Testing & Debugging")
@@ -157,11 +132,9 @@ code_quality = FactoryBot.create(:rubric_category, name: "Code Quality")
 technical_quality = FactoryBot.create(:rubric_category, name: "Technical Quality")
 technical_presentation = FactoryBot.create(:rubric_category, name: "Technical Presentation")
 feature_delivery = FactoryBot.create(:rubric_category, name: "Feature Delivery")
-
 js = FactoryBot.create(:rubric_category, name: "JavaScript")
-react = FactoryBot.create(:rubric_categories, name: "React")
+react = FactoryBot.create(:rubric_category, name: "React")
 professionalism = FactoryBot.create(:rubric_category, name: "Professionalism")
-
 agile = FactoryBot.create(:rubric_category, name: "Agile Process")
 git_workflow = FactoryBot.create(:rubric_category, name: "Git Workflow")
 ci = FactoryBot.create(:rubric_category, name: "CI & Deployment")
@@ -169,9 +142,7 @@ documentation = FactoryBot.create(:rubric_category, name: "Documentation")
 stretch_goal = FactoryBot.create(:rubric_category, name: "Stretch Goal")
 fe_ui = FactoryBot.create(:rubric_category, name: "Front-End UI/UX")
 fe_quality = FactoryBot.create(:rubric_category, name: "Front-End Code Quality & Testing")
-
-
-# 2 rubric_templates, 1 for mod 1, and 1 for mod 2 projects
+# rubric_templates
 # mod1
 be_mod1_project_1_rubric = FactoryBot.create(:rubric_template)
 be_mod1_project_1_rubric.rubric_categories << [testing, functionality, ruby_mechanics, ruby_conventions, version_control]
@@ -191,7 +162,6 @@ be_mod1_project_4_rubric = FactoryBot.create(:rubric_template)
 be_mod1_project_4_rubric.rubric_categories << [tdd, functionality, oop, convention_mechanics]
 fe_mod1_project_4_rubric = FactoryBot.create(:rubric_template)
 fe_mod1_project_4_rubric.rubric_categories << [tdd, functionality, js, professionalism, design]
-
 # mod2
 be_mod2_project_1_rubric = FactoryBot.create(:rubric_template)
 be_mod2_project_1_rubric.rubric_categories << [testing_and_debugging, feature_completeness, rails, database_design, ar]
@@ -209,7 +179,6 @@ be_mod2_project_4_rubric = FactoryBot.create(:rubric_template)
 be_mod2_project_4_rubric.rubric_categories << [testing_and_debugging, feature_completeness, rails, database_design, ar]
 fe_mod2_project_4_rubric = FactoryBot.create(:rubric_template)
 fe_mod2_project_4_rubric.rubric_categories << [js, professionalism, functionality, testing, fe_ui]
-
 # mod3
 be_mod3_project_1_rubric = FactoryBot.create(:rubric_template)
 be_mod3_project_1_rubric.rubric_categories << [testing_and_debugging, feature_completeness, rails, database_design, ar]
@@ -227,13 +196,11 @@ be_mod3_project_4_rubric = FactoryBot.create(:rubric_template)
 be_mod3_project_4_rubric.rubric_categories << [testing_and_debugging, feature_completeness, rails, database_design, ar]
 fe_mod3_project_4_rubric = FactoryBot.create(:rubric_template)
 fe_mod3_project_4_rubric.rubric_categories << [js, professionalism, functionality, testing, fe_ui, react]
-
 # mod4
 be_mod4_project_1_rubric = FactoryBot.create(:rubric_template)
 be_mod4_project_1_rubric.rubric_categories << [agile, git_workflow, ci, documentation, testing_and_debugging, stretch_goal, fe_ui, fe_quality]
 fe_mod4_project_1_rubric = FactoryBot.create(:rubric_template)
 fe_mod4_project_1_rubric.rubric_categories << [agile, git_workflow, ci, documentation, testing_and_debugging, stretch_goal, fe_ui, fe_quality]
-
 # projects
 flashcards = FactoryBot.create(:project_template, mod: "1", project_number: "1", rubric_template_id: be_mod1_project_1_rubric.id, name: "Flashcards", program: "BE", project_type: 0)
 battleship = FactoryBot.create(:project_template, mod: "1", project_number: "2", rubric_template_id: be_mod1_project_2_rubric_a.id, name: "Battleship", program: "BE", project_type: 1)
@@ -242,35 +209,28 @@ black_thursday = FactoryBot.create(:project_template, mod: "1", project_number: 
 futbol = FactoryBot.create(:project_template, mod: "1", project_number: "3", rubric_template_id: be_mod1_project_3_rubric.id, name: "Futbol", program: "BE", project_type: 2)
 enigma = FactoryBot.create(:project_template, mod: "1", project_number: "4", rubric_template_id: be_mod1_project_4_rubric.id, name: "Enigma", program: "BE", is_final: true, project_type: 0)
 nightwriter = FactoryBot.create(:project_template, mod: "1", project_number: "4", rubric_template_id: be_mod1_project_4_rubric.id, name: "Night Writer", program: "BE", is_final: true, project_type: 0)
-
 js_fun_library = FactoryBot.create(:project_template, mod: "1", project_number: "1", rubric_template_id: fe_mod1_project_1_rubric.id, name: "JS Fun at the Library", program: "FE", project_type: 0)
 rom_com = FactoryBot.create(:project_template, mod: "1", project_number: "2", rubric_template_id: fe_mod1_project_2_rubric.id, name: "RomCom", program: "FE", project_type: 1)
 intention = FactoryBot.create(:project_template, mod: "1", project_number: "3", rubric_template_id: fe_mod1_project_3_rubric.id, name: "Intention Timer", program: "FE", project_type: 2)
 tic_tac_toe = FactoryBot.create(:project_template, mod: "1", project_number: "4", rubric_template_id: fe_mod1_project_4_rubric.id, name: "Tic Tac Toe", program: "FE", is_final: true, project_type: 0)
-
 relational = FactoryBot.create(:project_template, mod: "2", project_number: "1", rubric_template_id: be_mod2_project_1_rubric.id, name: "Relational Rails", program: "BE", project_type: 1)
 adopt = FactoryBot.create(:project_template, mod: "2", project_number: "2", rubric_template_id: be_mod2_project_2_rubric.id, name: "Adopt don't Shop", program: "BE", project_type: 0)
 black_rails = FactoryBot.create(:project_template, mod: "2", project_number: "3", rubric_template_id: be_mod2_project_3_rubric.id, name: "Black Thursday on Rails", program: "BE", project_type: 2)
 discounts = FactoryBot.create(:project_template, mod: "2", project_number: "4", rubric_template_id: be_mod2_project_4_rubric.id, name: "Bulk Discounts", program: "BE", is_final: true, project_type: 0)
-
 js_fun = FactoryBot.create(:project_template, mod: "2", project_number: "1", rubric_template_id: fe_mod2_project_1_rubric.id, name: "JSFun", program: "FE", project_type: 0)
 fit = FactoryBot.create(:project_template, mod: "2", project_number: "2", rubric_template_id: fe_mod2_project_2_rubric.id, name: "FitLit", program: "FE", project_type: 1)
 game_time = FactoryBot.create(:project_template, mod: "2", project_number: "3", rubric_template_id: fe_mod2_project_3_rubric.id, name: "Game Time", program: "FE", project_type: 2)
 travel_tracker = FactoryBot.create(:project_template, mod: "2", project_number: "4", rubric_template_id: fe_mod2_project_4_rubric.id, name: "Travel Tracker", program: "FE", is_final: true, project_type: 0)
-
 viewing_party = FactoryBot.create(:project_template, mod: "3", project_number: "1", rubric_template_id: be_mod3_project_1_rubric.id, name: "Relational Rails", program: "BE", project_type: 0)
 black_api_edition = FactoryBot.create(:project_template, mod: "3", project_number: "2", rubric_template_id: be_mod3_project_2_rubric.id, name: "Black Thursday API Edition", program: "BE", project_type: 1)
 consultancy = FactoryBot.create(:project_template, mod: "3", project_number: "3", rubric_template_id: be_mod3_project_3_rubric.id, name: "Consultancy", program: "BE", project_type: 2)
 weather = FactoryBot.create(:project_template, mod: "3", project_number: "4", rubric_template_id: be_mod3_project_4_rubric.id, name: "Sweater Weather", program: "BE", is_final: true, project_type: 0)
-
 tomatillos = FactoryBot.create(:project_template, mod: "3", project_number: "1", rubric_template_id: fe_mod3_project_1_rubric.id, name: "Rancid Tomatillos", program: "FE", project_type: 0)
 stretch = FactoryBot.create(:project_template, mod: "3", project_number: "2", rubric_template_id: fe_mod3_project_2_rubric.id, name: "Stretch", program: "FE", project_type: 1)
 niche_audience = FactoryBot.create(:project_template, mod: "3", project_number: "3", rubric_template_id: fe_mod3_project_3_rubric.id, name: "Niche Audience", program: "FE", project_type: 2)
 ideas = FactoryBot.create(:project_template, mod: "3", project_number: "4", rubric_template_id: fe_mod3_project_4_rubric.id, name: "Ideas-4-Ideaboxes", program: "FE", is_final: true, project_type: 0)
-
 capstone_be = FactoryBot.create(:project_template, mod: "4", project_number: "1", rubric_template_id: be_mod4_project_1_rubric.id, name: "Capstone", program: "BE", project_type: 2)
 capstone_fe = FactoryBot.create(:project_template, mod: "4", project_number: "1", rubric_template_id: fe_mod4_project_1_rubric.id, name: "Capstone", program: "FE", project_type: 2)
-
 
 # Student 0 Projects
 student_0_mod1_project_1 = FactoryBot.create(:student_project, student_id: student_0.id, project_template_id: flashcards.id)
@@ -382,7 +342,6 @@ student_13_mod3_project_1 = FactoryBot.create(:student_project, student_id: stud
 student_13_mod3_project_2 = FactoryBot.create(:student_project, student_id: student_13.id, project_template_id: black_api_edition.id)
 student_13_mod3_project_3 = FactoryBot.create(:student_project, student_id: student_13.id, project_template_id: consultancy.id)
 student_13_mod3_project_4 = FactoryBot.create(:student_project, student_id: student_13.id, project_template_id: weather.id)
-
 # Student 14 Projects
 student_14_mod1_project_1 = FactoryBot.create(:student_project, student_id: student_14.id, project_template_id: flashcards.id)
 student_14_mod1_project_2 = FactoryBot.create(:student_project, student_id: student_14.id, project_template_id: mastermind.id)
@@ -519,27 +478,9 @@ student_23_mod3_project_2 = FactoryBot.create(:student_project, student_id: stud
 student_23_mod3_project_3 = FactoryBot.create(:student_project, student_id: student_23.id, project_template_id: niche_audience.id)
 student_23_mod3_project_4 = FactoryBot.create(:student_project, student_id: student_23.id, project_template_id: ideas.id)
 student_23_mod4_project_1 = FactoryBot.create(:student_project, student_id: student_23.id, project_template_id: capstone_fe.id)
-
-
-# 14 project feedback (4 for mod 1 project, 5 for mod 2)
-feedback_1 = FactoryBot.create(:project_feedback, instructor_id: instructor.id, project_id: project_1.id, rubric_template_category_id: mod1_rubric.rubric_template_categories[0].id)
-
-
-
-feedback_2 = FactoryBot.create(:project_feedback, instructor_id: instructor.id, project_id: project_1.id, rubric_template_category_id: mod1_rubric.rubric_template_categories[1].id)
-feedback_3 = FactoryBot.create(:project_feedback, instructor_id: instructor.id, project_id: project_1.id, rubric_template_category_id: mod1_rubric.rubric_template_categories[2].id)
-feedback_4 = FactoryBot.create(:project_feedback, instructor_id: instructor.id, project_id: project_1.id, rubric_template_category_id: mod1_rubric.rubric_template_categories[3].id)
-feedback_5 = FactoryBot.create(:project_feedback, instructor_id: instructor.id, project_id: project_2.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[0].id)
-feedback_6 = FactoryBot.create(:project_feedback, instructor_id: instructor.id, project_id: project_2.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[1].id)
-feedback_7 = FactoryBot.create(:project_feedback, instructor_id: instructor.id, project_id: project_2.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[2].id)
-feedback_8 = FactoryBot.create(:project_feedback, instructor_id: instructor.id, project_id: project_2.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[3].id)
-feedback_9 = FactoryBot.create(:project_feedback, instructor_id: instructor.id, project_id: project_2.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[4].id)
-feedback_10 = FactoryBot.create(:project_feedback, instructor_id: instructor.id, project_id: project_3.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[0].id)
-feedback_11 = FactoryBot.create(:project_feedback, instructor_id: instructor.id, project_id: project_3.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[1].id)
-feedback_12 = FactoryBot.create(:project_feedback, instructor_id: instructor.id, project_id: project_3.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[2].id)
-feedback_13 = FactoryBot.create(:project_feedback, instructor_id: instructor.id, project_id: project_3.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[3].id)
-feedback_14 = FactoryBot.create(:project_feedback, instructor_id: instructor.id, project_id: project_3.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[4].id)
-
+# feedback
+feedback_1 = FactoryBot.create(:project_feedback, instructor_id: instructor_1.id, project_id: student_0_mod1_project_3.id, rubric_template_category_id: be_mod1_project_3_rubric.rubric_template_categories[0].id)
+feedback_2 = FactoryBot.create(:project_feedback, instructor_id: instructor_1.id, project_id: student_0_mod1_project_3.id, rubric_template_category_id: be_mod1_project_3_rubric.rubric_template_categories[1].id)
 # reset pk sequences to current max value
 ActiveRecord::Base.connection.tables.each do |t|
   ActiveRecord::Base.connection.reset_pk_sequence!(t)
