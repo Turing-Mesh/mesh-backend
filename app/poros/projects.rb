@@ -13,8 +13,6 @@ class Projects
 
   def get_student_projects
     projects = StudentProject.student_projects_by_mod(@id, @mod.to_s)
-    projects.map do |project|
-      StudentProjects.new(project)
-    end
+    projects.map { |project| StudentProjects.new(project) } if !projects.empty?  
   end
 end

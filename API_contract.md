@@ -22,9 +22,11 @@ The request provides the projects for a valid matching student id and mod (sent 
 * __Required__
   * Mod query parameter must be included and have an integer value between 0-4. If the mod query parameter is missing, or is an invalid value an error is sent (see [error handling](#error-handling)).
 * Data is returned in ascending order by project number.
+* When no projects exist for that student and mod, there is still a json response with the student_projects and project_feedback as nil.
 
-  Example json response
+  Example json response with projects
 
+  `GET /api/v1/students/1/student_projects?mod=1`
   ```json
   {
     "data": {
@@ -110,6 +112,22 @@ The request provides the projects for a valid matching student id and mod (sent 
     }
   }
   ```
+  Example json response without projects
+
+  `GET /api/v1/students/1/student_projects?mod=2`
+  ```json
+  {
+    "data": {
+      "id": "1",
+      "type": "projects",
+      "attributes": {
+        "mod": "2",
+        "student_projects": null,
+        "project_feedback": null
+      }
+    }
+  }
+  ```
 
 ### Instructor Create Project Feedback
 `POST /api/v1/student_projects`
@@ -124,6 +142,7 @@ The request creates a student project record and related project feedback record
   * rubric_template_category_id = integer
   * score = float
 
+  Example json response
   ```json
   {
     "instructor_id": 10,
@@ -160,7 +179,7 @@ The request creates a student project record and related project feedback record
 ## Error Handling
 
 ### Sad Path Response (no data matches query)
-* A sad path response is returned when no matching data can be found, such as when the student search returns 0 results, or the student has no project feedback on file for current mod.
+* A sad path response is returned when no matching data can be found, such as when the student search returns 0 results.
 
   ```json
     {

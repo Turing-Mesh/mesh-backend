@@ -114,11 +114,109 @@ describe 'Student projects request' do
 
       json = JSON.parse(response.body, symbolize_names:true)
       projects = json[:data][:attributes][:student_projects]
-      # require "pry"; binding.pry
+
       expect(projects.count).to eq(2)
       expect(projects.first[:id]).to eq(@project_2.id)
       expect(projects.last[:id]).to eq(@project_3.id)
       expect(projects.include?(@project_1.id)).to eq(false)
+    end
+  end
+
+  describe 'sad path' do
+    it "when no projects are found for current mod it returns an nil for student_projects" do
+      student = create(:user, role: 0)
+      student_profile = create(:user_profile, user_id: student.id, current_mod: "2", starting_cohort: "2011", current_cohort: "2011", status: 0)
+      mod = 2
+
+      get "/api/v1/students/#{student.id}/student_projects?mod=#{mod}"
+
+      json = JSON.parse(response.body, symbolize_names:true)
+
+      expect(response).to be_successful
+      expect(json[:data][:attributes][:student_projects]).to be_nil
+      expect(json[:data][:attributes][:project_feedback]).to be_nil
+    end
+  end
+
+  describe 'edge cases' do
+    it "returns an error when the student id is invalid" do
+      mod = 2
+      id = 201
+      get "/api/v1/students/#{id}/student_projects?mod=#{mod}"
+
+      expect(response).to_not be_successful
+      json = JSON.parse(response.body, symbolize_names:true)
+
+      expect(response.status).to eq(404)
+      expect(json[:error]).to be_a(String)
+      expect(json[:error]).to eq("Couldn't find User with 'id'=#{id}")
+    end
+
+    it "returns an error when the student id not an integer" do
+      mod = 2
+      id = 'id'
+      get "/api/v1/students/#{id}/student_projects?mod=#{mod}"
+
+      expect(response).to_not be_successful
+      json = JSON.parse(response.body, symbolize_names:true)
+
+      expect(response.status).to eq(400)
+      expect(json[:error]).to be_a(String)
+      expect(json[:error]).to eq("String not accepted as id")
+    end
+
+    it "returns an error when the mod parameter is missing" do
+      student = create(:user, role: 0)
+      student_profile = create(:user_profile, user_id: student.id, current_mod: "2", starting_cohort: "2011", current_cohort: "2011", status: 0)
+      get "/api/v1/students/#{student.id}/student_projects"
+
+      expect(response).to_not be_successful
+      json = JSON.parse(response.body, symbolize_names:true)
+
+      expect(response.status).to eq(400)
+      expect(json[:error]).to be_a(String)
+      expect(json[:error]).to eq("Mod parameter is missing or invalid")
+    end
+
+    it "returns an error when the mod parameter is blank" do
+      student = create(:user, role: 0)
+      student_profile = create(:user_profile, user_id: student.id, current_mod: "2", starting_cohort: "2011", current_cohort: "2011", status: 0)
+      get "/api/v1/students/#{student.id}/student_projects?mod="
+
+      expect(response).to_not be_successful
+      json = JSON.parse(response.body, symbolize_names:true)
+
+      expect(response.status).to eq(400)
+      expect(json[:error]).to be_a(String)
+      expect(json[:error]).to eq("Mod parameter is missing or invalid")
+    end
+
+    it "returns an error when mod parameter is a string" do
+      student = create(:user, role: 0)
+      student_profile = create(:user_profile, user_id: student.id, current_mod: "2", starting_cohort: "2011", current_cohort: "2011", status: 0)
+      mod = "happy"
+      get "/api/v1/students/#{student.id}/student_projects?mod=#{mod}"
+
+      expect(response).to_not be_successful
+      json = JSON.parse(response.body, symbolize_names:true)
+
+      expect(response.status).to eq(400)
+      expect(json[:error]).to be_a(String)
+      expect(json[:error]).to eq("Mod parameter is missing or invalid")
+    end
+
+    it "returns an error when the mod parameter is not a value between 0-4" do
+      student = create(:user, role: 0)
+      student_profile = create(:user_profile, user_id: student.id, current_mod: "2", starting_cohort: "2011", current_cohort: "2011", status: 0)
+      mod = 5
+      get "/api/v1/students/#{student.id}/student_projects?mod=#{mod}"
+
+      expect(response).to_not be_successful
+      json = JSON.parse(response.body, symbolize_names:true)
+
+      expect(response.status).to eq(400)
+      expect(json[:error]).to be_a(String)
+      expect(json[:error]).to eq("Mod parameter is missing or invalid")
     end
   end
 end
