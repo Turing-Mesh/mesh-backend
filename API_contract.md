@@ -142,7 +142,7 @@ The request creates a student project record and related project feedback record
   * rubric_template_category_id = integer
   * score = float
 
-  Example json response
+  Example json request body
   ```json
   {
     "instructor_id": 10,
