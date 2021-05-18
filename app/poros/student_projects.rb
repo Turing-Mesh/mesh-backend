@@ -6,7 +6,8 @@ class StudentProjects
               :project_type,
               :is_final_project,
               :instructor_comments,
-              :student_comments
+              :student_comments,
+              :project_feedback
 
   def initialize(data)
     @id = data[:id]
@@ -17,11 +18,11 @@ class StudentProjects
     @is_final_project = data[:is_final]
     @instructor_comments = data[:instructor_comments]
     @student_comments = data[:student_comments]
-    @data = data
+    @project_feedback = get_project_feedback(data)
   end
 
-  def project_feedback
-    @data.project_feedbacks.map do |feedback|
+  def get_project_feedback(data)
+    data.project_feedbacks.map do |feedback|
       {
         id: feedback.id,
         rubric_category_name: feedback.rubric_category.name,

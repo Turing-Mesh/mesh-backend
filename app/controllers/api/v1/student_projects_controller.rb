@@ -1,5 +1,6 @@
 class Api::V1::StudentProjectsController < ApplicationController
   def index
-    # require "pry"; binding.pry
+    projects = Projects.new(params)
+    json_response(ProjectsSerializer.new(projects))
   end
 end
