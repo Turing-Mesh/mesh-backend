@@ -6,6 +6,7 @@
 | ---------- | ------ | -------- | ------:|
 | GET | /api/v1/students/:student_id/student_projects?mod=1 | Get all of the project feedback for single student and a single mod | [json](#student-projects-by-mod) |
 | PATCH | /api/v1/students/:student_id/student_projects/:id | Update student's project with personal comments | [json](#students-update-project) |
+| GET | /api/v1/instructors/:instructor_id/instructor_students/:student_id/project_templates?mod=1&project_number=2 | Get a student mod project rubric categories | [json](#student-project-rubric-categories) |
 | GET | /api/v1/instructors/:instructor_id/instructor_students?mod=1 | Get all of the student names and ids for instructor's current mod | [json](#instructor-module-students) |
 | POST | /api/v1/instructors/:instructor_id/instructor_students/search | Search for a single student's project information, response is same as students-project-by-mod (we need first and last name to search by in post body request)| [json](#instructor-students-search) |
 | POST | /api/v1/student_projects | Create student_project and related project_feedback records | [json](#instructor-create-project-feedback) |
@@ -14,6 +15,44 @@
 | ERROR | errors | Error handling for requests | [json](#error-handling) |
 
 ## JSON Responses
+
+### Student Project Rubric Categories
+`GET /api/v1/instructors/:instructor_id/instructor_students/:student_id/project_templates?mod=1&project_number=2`
+
+The request returns a list of the rubric categories for a given student's mod project.
+* __Required__
+
+  The following query parameters are required. If any required fields are missing or include invalid data an error will be returned (see [error handling](#error-handling)).
+  * mod = integer
+  * project_number = integer
+
+  Example json request body
+  ```json
+  {
+    "student_id": 71,
+    "project_template_id": 99,
+    "mod": 1,
+    "project_number": 2,
+    "rubric_template": [
+      {
+        "rubric_category_template_id": 1,
+        "rubric_category_name": "ActiveRecord"
+      },
+      {
+        "rubric_category_template_id": 2,
+        "rubric_category_name": "Rails"
+      },
+      {
+        "rubric_category_template_id": 3,
+        "rubric_category_name": "Feature Completeness"
+      },
+      {
+        "rubric_category_template_id": 4,
+        "rubric_category_name": "Testing"
+      }
+    ]
+  }
+  ```
 
 ### Student Projects By Mod
 `GET /api/v1/students/:student_id/student_projects?mod=1`
