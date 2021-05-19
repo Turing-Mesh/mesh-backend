@@ -27,4 +27,24 @@ class User < ApplicationRecord
         student.user_profile if student.user_profile.current_mod == mod_num
       end.compact
   end
+
+  def find_students(search_term)
+    case search_term.keys
+    when ["first_name"]
+      
+      UserProfile.select("first_name, last_name, current_cohort, user_id")
+    .where("status = ? " , "0")
+    .where("user_profiles.first_name ILIKE ?"  , "%#{search_term["first_name"]}%")
+    when ["last_name"]
+      
+      UserProfile.select("first_name, last_name, current_cohort, user_id")
+    .where("status = ? " , "0")
+    .where("user_profiles.last_name ILIKE ?"  , "%#{search_term["last_name"]}%")
+    when ["first_name" , "last_name"]
+      
+      UserProfile.select("first_name, last_name, current_cohort, user_id")
+    .where("status = ? " , "0")
+    .where("user_profiles.first_name ILIKE ? AND user_profiles.last_name ILIKE ? "  , "%#{search_term["first_name"]}%" ,  "%#{search_term["last_name"]}%" )
+    end
+  end
 end
