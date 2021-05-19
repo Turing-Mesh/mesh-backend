@@ -8,8 +8,8 @@
 | PATCH | /api/v1/students/:student_id/student_projects/:id | Update student's project with personal comments | [json](#students-update-project) |
 | GET | /api/v1/instructors/:instructor_id/instructor_students/:student_id/project_templates?mod=1&project_number=2 | Get a mod project template and rubric categories | [json](#student-project-rubric-categories) |
 | GET | /api/v1/instructors/:instructor_id/instructor_students?mod=1 | Get all of the student names and ids for instructor's current mod | [json](#instructor-module-students) |
-| POST | /api/v1/instructors/:instructor_id/instructor_students/search | Search for a single student's project information, response is same as students-project-by-mod (we need first and last name to search by in post body request)| [json](#instructor-students-search) |
-| POST | /api/v1/student_projects | Create student_project and related project_feedback records | [json](#instructor-create-project-feedback) |
+| POST | /api/v1/instructors/:instructor_id/instructor_students/search | Instructors search for student's by name  | [json](#instructor-students-search) |
+| POST | /api/v1/student_projects | Instructor create student_project and related project_feedback records | [json](#instructor-create-project-feedback) |
 | POST | /api/v1/users | Registration new user  | [json](#user-registration) |
 | POST | /api/v1/sessions | Login a user | [json](#sessions-create) |
 | ERROR | errors | Error handling for requests | [json](#error-handling) |
@@ -184,7 +184,7 @@ The request provides the student's (name and id) for a given instructor who teac
   `GET /api/v1/instructor/1/instructor_students?mod=2`
 
   ```json
- {
+  {
    "data": [
     {
       "id": "215",
@@ -195,7 +195,7 @@ The request provides the student's (name and id) for a given instructor who teac
         "last_name": "Dach",
         "current_cohort": "2011"
         }
-    },
+      },
     {
       "id": "216",
       "type": "student",
