@@ -230,6 +230,66 @@ __** If existing student comments are removed please send an empty string.__
 
 The response is the same as the [Student Projects By Mod](#student-projects-by-mod).
 
+### Instructor Students Search
+`POST /api/v1/instructor/:instructor_id/instructor_students/search`
+
+The request provides all of the *currently enrolled* student's name and id based on a search for either their first name or last name.
+
+* __Required__
+ * Request body must contain a `search_term` key with value(s) `first_name` or `last_name` (or both).
+ Example json request with body
+ > POST /api/v1/instructor/1/instructor_students/search 
+ ```json 
+ 
+{
+  search_term: {
+    first_name: "example first name",
+    last_name: "example last name"
+  }
+
+}
+
+
+ ```
+
+
+
+ Example json response
+```json
+
+{
+  :data=>
+  [
+    {
+      :id=>nil, 
+      :type=>"student", 
+      :attributes=>
+        {
+          :user_id=>535, 
+          :first_name=>"Henry", 
+          :last_name=>"Bogisich", 
+          :current_cohort=>"2011"
+          }
+    },
+
+   {
+     :id=>nil, 
+     :type=>"student", 
+     :attributes=>
+      {
+        :user_id=>536, 
+        :first_name=>"Henry", 
+        :last_name=>"Fuller", 
+        :current_cohort=>"2011"
+        }
+    }
+   ]  
+}
+
+```
+
+
+
 ### Instructor Create Project Feedback
 `POST /api/v1/student_projects`
 
