@@ -4,4 +4,12 @@ class Api::V1::InstructorStudentsController < ApplicationController
     instructor = User.find(params[:instructor_id])
     json_response(StudentSerializer.new(instructor.get_students(params[:mod])))
   end
+
+  def show
+    instructor = User.find(params[:instructor_id])
+    students = instructor.find_students(params[:search_term])
+    json_response(StudentSerializer.new(students))
+  end
 end
+
+
