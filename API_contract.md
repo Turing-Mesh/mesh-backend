@@ -129,8 +129,54 @@ The request provides the projects for a valid matching student id and mod (sent 
   }
   ```
 
+### Instructor Students
+`GET /api/v1/instructor/:instructor_id/instructor_students?mod=x`
+
+The request provides the student's (name and id) for a given instructor who teaches a given module
+* __Required__
+ * Mod query parameter must be included and have an integer value between 0-4. If the mod query parameter is missing, or is an invalid value an error is sent (see [error handling](#error-handling)).
+ * Data is returned in ascending order by user_id.
+ * Students are only returned when they lie within the given module request
+
+ Example json response with projects
+
+  `GET /api/v1/instructor/1/instructor_students?mod=2`
+
+  ```json
+ {
+   :data=>
+  [
+    {
+      :id=>"215",
+      :type=>"student",
+      :attributes=>
+                {
+                  :user_id=>262, 
+                  :first_name=>"Mike", 
+                  :last_name=>"Dach", 
+                  :current_cohort=>"2011"
+                  }
+      },
+
+    {
+      :id=>"216",
+      :type=>"student",
+      :attributes=>
+                {
+                  :user_id=>263,
+                  :first_name=>"Sharonda", 
+                  :last_name=>"Schimmel", 
+                  :current_cohort=>"2011"
+                  }
+    }
+  ]
+    
+}
+```
+
 ### Instructor Create Project Feedback
 `POST /api/v1/student_projects`
+
 
 The request creates a student project record and related project feedback records for a valid matching instructor id, student id and project template id.
 * __Required__

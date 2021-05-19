@@ -19,7 +19,6 @@ describe 'Instructor Students request' do
     it "returns information about the students under an instructor" do
       get "/api/v1/instructors/#{@instructor.id}/instructor_students?mod=2"
       json = JSON.parse(response.body, symbolize_names: true)
-      
       expect(json[:data].class).to eq Array
       expect(json[:data].first[:type]).to eq "student"
       expect(json[:data].first[:attributes].keys).to eq %i(user_id first_name last_name current_cohort)
@@ -39,6 +38,12 @@ describe 'Instructor Students request' do
       get "/api/v1/instructors/#{@instructor.id}/instructor_students"
       json = JSON.parse(response.body, symbolize_names: true)
       expect(json[:data]).to eq "Invalid Query Parameters"
+    end
+
+    it "should be given a correct instructor id" do
+      get "/api/v1/instructors/99999/instructor_students?mod=2"
+      json = JSON.parse(response.body, symbolize_names: true)
+      expect(json[:error]).to eq "Couldn't find User with 'id'=99999"
     end
   end
 end
