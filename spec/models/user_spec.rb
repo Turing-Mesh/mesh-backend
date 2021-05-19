@@ -71,4 +71,20 @@ RSpec.describe User, type: :model do
       expect(user.save).to eq(false)
     end
   end
+
+  describe 'instance methods' do
+    it "get_students" do
+      instructor = User.create!(email: 'haegonorious@email.com', password: 'password', role: :instructor)
+      student = User.create!(email: 'bazzinni@email.com', password: 'password', role: :student)
+  
+      instructor_student = create(:instructor_student, instructor_id: instructor.id, student_id: student.id)
+      student_profile = create(:user_profile, user_id: student.id, current_mod: "2", starting_cohort: "2010", current_cohort: "2010", status: 0)
+      instructor_profile = create(:user_profile, user_id: instructor.id, current_mod: "2")
+  
+      expect(instructor.get_students("2").class).to eq Array
+      expect(instructor.get_students("2").first).to eq student_profile
+      expect(instructor.get_students("3")).to eq ([]) 
+
+    end
+  end
 end
