@@ -81,7 +81,7 @@ The request provides the projects for a valid matching student id and mod (sent 
             "project_number": "1",
             "project_type": "solo",
             "is_final_project": false,
-            "average_score": 2.75,
+            "average_score": "2.75",
             "instructor_comments": "Some real good stuff.",
             "student_comments": "My personal notes.",
             "project_feedback": [
@@ -118,7 +118,7 @@ The request provides the projects for a valid matching student id and mod (sent 
             "project_number": "2",
             "project_type": "paired",
             "is_final_project": false,
-            "average_score": 3.25,
+            "average_score": "3.25",
             "instructor_comments": "Some real awesome stuff.",
             "student_comments": null,
             "project_feedback": [
