@@ -11,11 +11,15 @@ class StudentProject < ApplicationRecord
       project_templates.mod,
       project_templates.program,
       project_templates.project_number,
-      project_templates.is_final,
+      project_templates.is_final as is_final_project,
       project_templates.rubric_template_id')
     .joins(:project_template)
     .where('student_projects.student_id = ?', id)
     .where('project_templates.mod = ?', mod)
     .order('project_templates.project_number')
+  end
+
+  def average_feedback_score
+    project_feedbacks.average(:score)
   end
 end

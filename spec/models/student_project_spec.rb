@@ -37,4 +37,25 @@ RSpec.describe StudentProject, type: :model do
       end
     end
   end
+
+  describe 'instance methods' do
+    describe '#average_feedback_score' do
+      it "returns the average score for the project feedback for a single student project" do
+        student1 = create(:user, role: 0)
+        instructor = create(:user, role: 1)
+        mod_rubric = create(:rubric_template)
+        testing = create(:rubric_category)
+        oop = create(:rubric_category)
+        completion = create(:rubric_category)
+        mod_rubric.rubric_categories << [testing, oop, completion]
+        project_template1 = create(:project_template, mod: "2", project_number: "3", rubric_template_id: mod_rubric.id)
+        project_1 = create(:student_project, student_id: student1.id, project_template_id: project_template1.id)
+        feedback_1 = create(:project_feedback, instructor_id: instructor.id, project_id: project_1.id, rubric_template_category_id: mod_rubric.rubric_template_categories[0].id, score: 3.5)
+        feedback_2 = create(:project_feedback, instructor_id: instructor.id, project_id: project_1.id, rubric_template_category_id: mod_rubric.rubric_template_categories[1].id, score: 3.0)
+        feedback_3 = create(:project_feedback, instructor_id: instructor.id, project_id: project_1.id, rubric_template_category_id: mod_rubric.rubric_template_categories[2].id, score: 3.0)
+
+        expect(project_1.average_feedback_score).to eq(0.316666666666667e1)
+      end
+    end
+  end
 end
