@@ -47,7 +47,7 @@ describe StudentProjects, type: :model do
       @feedback_14 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_3.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[4].id)
     end
 
-    it "creates a Projects PORO based on input" do
+    it "creates a StudentProjects PORO based on input" do
       mod = 2
       id = @student.id
       project = StudentProject.student_projects_by_mod(id, mod.to_s).first
