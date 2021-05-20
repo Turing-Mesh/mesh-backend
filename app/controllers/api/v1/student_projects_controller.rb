@@ -9,13 +9,8 @@ class Api::V1::StudentProjectsController < ApplicationController
   end
 
   def update
-    project = StudentProject.find_by(id: params[:id], student_id: params[:student_id])
-    if project.nil?
-      User.find(params[:student_id])
-      StudentProject.find(params[:id])
-      error = "The student id and project id provided are not a valid combination"
-      render_error(error)
-    elsif !params.keys.include?("student_comments")
+    project = StudentProject.find_by!(id: params[:id], student_id: params[:student_id])
+    if !params.keys.include?("student_comments")
       error = "Student comments missing, it must be included in request body"
       render_error(error)
     else

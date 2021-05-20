@@ -77,7 +77,7 @@ RSpec.describe 'Student comments request', type: :request do
 
         expect(response.status).to eq(404)
         expect(json[:error]).to be_a(String)
-        expect(json[:error]).to eq("Couldn't find User with 'id'=#{id}")
+        expect(json[:error]).to eq("Couldn't find StudentProject")
       end
 
       it "returns an error when the student id is not an integer" do
@@ -107,7 +107,7 @@ RSpec.describe 'Student comments request', type: :request do
 
         expect(response.status).to eq(404)
         expect(json[:error]).to be_a(String)
-        expect(json[:error]).to eq("Couldn't find StudentProject with 'id'=#{id}")
+        expect(json[:error]).to eq("Couldn't find StudentProject")
       end
 
       it "returns an error when the project id is not an integer" do
@@ -138,9 +138,9 @@ RSpec.describe 'Student comments request', type: :request do
         expect(response).to_not be_successful
         json = JSON.parse(response.body, symbolize_names:true)
 
-        expect(response.status).to eq(400)
+        expect(response.status).to eq(404)
         expect(json[:error]).to be_a(String)
-        expect(json[:error]).to eq("The student id and project id provided are not a valid combination")
+        expect(json[:error]).to eq("Couldn't find StudentProject")
       end
 
       it "returns an error when the student_comments attribute is missing" do
