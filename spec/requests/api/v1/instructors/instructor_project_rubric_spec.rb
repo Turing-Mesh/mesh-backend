@@ -23,12 +23,12 @@ RSpec.describe 'Instructor Project Rubric Request' do
       @mod2_rubric.rubric_categories << [testing, oop, code_quality, completion, active_record]
       # 3 project templates, 1 for each project above
       project_template_1 = create(:project_template, mod: "1", project_number: "4", rubric_template_id: mod1_rubric.id)
-      project_template_2 = create(:project_template, mod: "2", project_number: "2", rubric_template_id: @mod2_rubric.id)
+      @project_template_2 = create(:project_template, mod: "2", project_number: "2", rubric_template_id: @mod2_rubric.id)
       project_template_3 = create(:project_template, mod: "2", project_number: "4", is_final: true, rubric_template_id: @mod2_rubric.id)
       project_template_4 = create(:project_template, mod: "3", project_number: "1", rubric_template_id: @mod2_rubric.id)
       # 3 projects, 1 for mod 1 and 2 for mod 2
       @project_1 = create(:student_project, student_id: @student.id, project_template_id: project_template_1.id)
-      @project_2 = create(:student_project, student_id: @student.id, project_template_id: project_template_2.id)
+      @project_2 = create(:student_project, student_id: @student.id, project_template_id: @project_template_2.id)
       @project_3 = create(:student_project, student_id: @student.id, project_template_id: project_template_3.id)
     end
     it "returns rubric categories for the given student, mod, and project number" do
@@ -47,13 +47,18 @@ RSpec.describe 'Instructor Project Rubric Request' do
       expect(project_rubric[:data][:attributes][:project_number]).to be_a String
       expect(project_rubric[:data][:attributes][:rubric_template]).to be_an Array
       expect(project_rubric[:data][:type]).to eq("project_rubric")
-      expect(project_rubric[:data][:id].to_i).to eq(@project_2.id)
+      expect(project_rubric[:data][:id].to_i).to eq(@project_template_2.id)
       expect(project_rubric[:data][:attributes][:rubric_template][0][:rubric_category_name]).to eq(@mod2_rubric.rubric_categories[0].name)
       expect(project_rubric[:data][:attributes][:rubric_template][1][:rubric_category_name]).to eq(@mod2_rubric.rubric_categories[1].name)
       expect(project_rubric[:data][:attributes][:rubric_template][2][:rubric_category_name]).to eq(@mod2_rubric.rubric_categories[2].name)
       expect(project_rubric[:data][:attributes][:rubric_template][3][:rubric_category_name]).to eq(@mod2_rubric.rubric_categories[3].name)
       expect(project_rubric[:data][:attributes][:rubric_template][4][:rubric_category_name]).to eq(@mod2_rubric.rubric_categories[4].name)
       expect(project_rubric[:data][:attributes][:student_id]).to eq(@student.id)
+    end
+  end
+  describe "sad path" do
+    it "needs query parameter" do
+
     end
   end
 end
