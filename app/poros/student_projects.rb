@@ -5,6 +5,7 @@ class StudentProjects
               :project_number,
               :project_type,
               :is_final_project,
+              :average_score,
               :instructor_comments,
               :student_comments,
               :project_feedback
@@ -15,7 +16,8 @@ class StudentProjects
     @program = data[:program]
     @project_number = data[:project_number]
     @project_type = data.project_template.project_type
-    @is_final_project = data[:is_final]
+    @is_final_project = data[:is_final_project]
+    @average_score = data.average_feedback_score
     @instructor_comments = data[:instructor_comments]
     @student_comments = data[:student_comments]
     @project_feedback = get_project_feedback(data)

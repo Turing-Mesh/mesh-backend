@@ -89,6 +89,7 @@ describe 'Student projects request' do
       expect(project[:project_number]).to be_a(String)
       expect(project[:project_type]).to be_a(String)
       expect(project[:is_final_project]).to be_a(FalseClass).or be_a(TrueClass)
+      expect(project[:average_score]).to be_a(String)
       expect(project[:instructor_comments]).to be_a(String)
       expect(project[:student_comments]).to be_a(String)
     end

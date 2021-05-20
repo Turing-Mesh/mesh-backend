@@ -35,11 +35,11 @@ describe StudentProjects, type: :model do
       @feedback_2 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_1.id, rubric_template_category_id: mod1_rubric.rubric_template_categories[1].id)
       @feedback_3 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_1.id, rubric_template_category_id: mod1_rubric.rubric_template_categories[2].id)
       @feedback_4 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_1.id, rubric_template_category_id: mod1_rubric.rubric_template_categories[3].id)
-      @feedback_5 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_2.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[0].id, comment: "This is a comment")
-      @feedback_6 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_2.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[1].id)
-      @feedback_7 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_2.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[2].id)
-      @feedback_8 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_2.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[3].id)
-      @feedback_9 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_2.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[4].id)
+      @feedback_5 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_2.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[0].id, score: 3.5, comment: "This is a comment")
+      @feedback_6 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_2.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[1].id, score: 3.0)
+      @feedback_7 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_2.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[2].id, score: 3.0)
+      @feedback_8 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_2.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[3].id, score: 4.0)
+      @feedback_9 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_2.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[4].id, score: 4.0)
       @feedback_10 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_3.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[0].id)
       @feedback_11 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_3.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[1].id)
       @feedback_12 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_3.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[2].id)
@@ -47,7 +47,7 @@ describe StudentProjects, type: :model do
       @feedback_14 = create(:project_feedback, instructor_id: @instructor.id, project_id: @project_3.id, rubric_template_category_id: mod2_rubric.rubric_template_categories[4].id)
     end
 
-    it "creates a Projects PORO based on input" do
+    it "creates a StudentProjects PORO based on input" do
       mod = 2
       id = @student.id
       project = StudentProject.student_projects_by_mod(id, mod.to_s).first
@@ -65,6 +65,8 @@ describe StudentProjects, type: :model do
       expect(student_project.project_type).to eq(@project_template_2.project_type)
       expect(student_project.is_final_project).to be_a(FalseClass).or be_a(TrueClass)
       expect(student_project.is_final_project).to eq(@project_template_2.is_final)
+      expect(student_project.average_score).to be_a(BigDecimal)
+      expect(student_project.average_score).to eq(0.35e1)
       expect(student_project.instructor_comments).to be_a(String)
       expect(student_project.instructor_comments).to eq(@project_2.instructor_comments)
       expect(student_project.student_comments).to be_a(String)
