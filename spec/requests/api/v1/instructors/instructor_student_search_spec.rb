@@ -60,7 +60,7 @@ describe 'Instructor Students request' do
           expect(json[:data].class).to eq Array
           expect(json[:data].first.keys).to eq [:id, :type, :attributes]
           expect(json[:data].first[:attributes].keys).to eq  [:user_id, :first_name, :last_name, :current_cohort]
-          expect(json[:data].first[:attributes][:last_name]).to eq @student_2_profile.last_name
+          expect(json[:data].first[:attributes][:last_name]).to eq @student_1_profile.last_name
         end
 
     let!(:last_name_body) {{
