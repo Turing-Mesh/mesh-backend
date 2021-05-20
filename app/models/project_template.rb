@@ -5,4 +5,11 @@ class ProjectTemplate < ApplicationRecord
   validates :name, :mod, :program, :project_number, presence: true
 
   enum project_type: [:solo, :paired, :team]
+
+
+  def self.get_project(program, mod, project_number)
+    where('program = ?', program)
+    .where('mod = ?', mod)
+    .where('project_number = ?', project_number)
+  end
 end
