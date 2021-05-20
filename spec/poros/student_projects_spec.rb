@@ -86,5 +86,16 @@ describe StudentProjects, type: :model do
       expect(feedback[:comment]).to be_a(String)
       expect(feedback[:comment]).to eq(@feedback_5.comment)
     end
+    describe "class methods" do
+      it "::get_project returns a project_template for the given student mod project" do
+        student_id = @student.id
+        mod = "2"
+        project_number = "3"
+        project = StudentProject.get_project(student_id, mod, project_number)
+
+        expect(project[0].student_id).to eq(@student.id)
+        expect(project[0].project_template_id).to eq(@project_template_2.id)
+      end
+    end
   end
 end
