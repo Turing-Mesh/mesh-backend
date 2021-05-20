@@ -12,7 +12,7 @@ class UserProfile < ApplicationRecord
       UserProfile.select("first_name, last_name, current_cohort, user_id")
     .where("status = ? " , "0")
     .where("user_profiles.first_name ILIKE ? AND user_profiles.last_name ILIKE ? "  , "#{first_name||=""}%" ,  "#{last_name||=""}%" )
-    .order(:first_name, :asc)
+    .order(:first_name)
   end
 end
 
