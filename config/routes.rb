@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :students, only: [] do
-        resources :student_projects, only: :index, as: 'projects'
+        resources :student_projects, only: [:index, :update], as: 'projects'
       end
 
       resources :instructors, only: [] do
