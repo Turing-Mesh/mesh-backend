@@ -240,15 +240,10 @@ The request provides all of the *currently enrolled* student's name and id based
  Example json request with body
  > POST /api/v1/instructor/1/instructor_students/search 
  ```json 
- 
 {
-  search_term: {
-    first_name: "example first name",
-    last_name: "example last name"
-  }
-
+  "first_name": "Aid",
+  "last_name": "Zie"
 }
-
 
  ```
 
@@ -256,34 +251,19 @@ The request provides all of the *currently enrolled* student's name and id based
 
  Example json response
 ```json
-
 {
-  :data=>
-  [
+  "data": [
     {
-      :id=>nil, 
-      :type=>"student", 
-      :attributes=>
-        {
-          :user_id=>535, 
-          :first_name=>"Henry", 
-          :last_name=>"Bogisich", 
-          :current_cohort=>"2011"
-          }
-    },
-
-   {
-     :id=>nil, 
-     :type=>"student", 
-     :attributes=>
-      {
-        :user_id=>536, 
-        :first_name=>"Henry", 
-        :last_name=>"Fuller", 
-        :current_cohort=>"2011"
-        }
+      "id": null,
+      "type": "student",
+      "attributes": {
+        "user_id": 1,
+        "first_name": "Aida",
+        "last_name": "Ziemann",
+        "current_cohort": "2011"
+      }
     }
-   ]  
+  ]
 }
 
 ```
