@@ -219,7 +219,7 @@ The request updates the student project record with personal student comments th
 
   * student_comments = string
 
-__** If existing student comments are removed please send an empty string.__
+__** If existing student comments are removed please send a nil value.__
 
   Example json request body
   ```json

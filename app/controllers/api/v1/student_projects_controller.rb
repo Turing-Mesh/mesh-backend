@@ -9,8 +9,7 @@ class Api::V1::StudentProjectsController < ApplicationController
   end
 
   def update
-    student = User.find(params[:student_id])
-    project = StudentProject.find(params[:id])
+    project = StudentProject.find_by(id: params[:id], student_id: params[:student_id])
     params[:mod] = project.project_template.mod
     if project.update(student_comments_params)
       projects = Projects.new(params)
