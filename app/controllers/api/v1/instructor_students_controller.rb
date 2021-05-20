@@ -6,8 +6,8 @@ class Api::V1::InstructorStudentsController < ApplicationController
   end
 
   def show
-    instructor = User.find(params[:instructor_id])
-    students = instructor.find_students(params[:search_term])
+    instructor = User.find(params[:instructor_id]).user_profile
+    students = instructor.find_students(params[:first_name], params[:last_name])
     json_response(StudentSerializer.new(students))
   end
 end
