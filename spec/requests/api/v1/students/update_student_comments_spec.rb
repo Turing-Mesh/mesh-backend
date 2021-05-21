@@ -15,7 +15,7 @@ RSpec.describe 'Student comments request', type: :request do
         patch "/api/v1/students/#{@student.id}/student_projects/#{@project_2.id}", headers: headers, params: params.to_json
 
         json = JSON.parse(response.body, symbolize_names:true)
-
+        require "pry"; binding.pry
         @project_2.reload
         expect(@project_2.student_comments).to eq(params[:student_comments])
         expect(response).to be_successful

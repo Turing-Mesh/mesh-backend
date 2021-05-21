@@ -16,44 +16,6 @@
 
 ## JSON Responses
 
-### Student Project Rubric Categories
-`GET /api/v1/instructors/:instructor_id/instructor_students/:student_id/project_templates?mod=1&project_number=2`
-
-The request returns a list of the rubric categories for a given student's mod project.
-* __Required__
-
-  The following query parameters are required. If any required fields are missing or include invalid data an error will be returned (see [error handling](#error-handling)).
-  * mod = integer
-  * project_number = integer
-
-  Example json request body
-  ```json
-  {
-    "student_id": 71,
-    "project_template_id": 99,
-    "mod": 1,
-    "project_number": 2,
-    "rubric_template": [
-      {
-        "rubric_category_template_id": 1,
-        "rubric_category_name": "ActiveRecord"
-      },
-      {
-        "rubric_category_template_id": 2,
-        "rubric_category_name": "Rails"
-      },
-      {
-        "rubric_category_template_id": 3,
-        "rubric_category_name": "Feature Completeness"
-      },
-      {
-        "rubric_category_template_id": 4,
-        "rubric_category_name": "Testing"
-      }
-    ]
-  }
-  ```
-
 ### Student Projects By Mod
 `GET /api/v1/students/:student_id/student_projects?mod=1`
 
@@ -163,8 +125,77 @@ The request provides the projects for a valid matching student id and mod (sent 
       "type": "projects",
       "attributes": {
         "mod": "2",
-        "student_projects": null,
-        "project_feedback": null
+        "student_projects": null
+      }
+    }
+  }
+  ```
+### Update Student Project Comments
+`PATCH /api/v1/students/:student_id/student_projects/:id`
+
+The request updates the student project record with personal student comments that are new, updated or removed. If the student id or project id in the route are missing, or invalid, an error will be returned (see [error handling](#error-handling)).
+* __Required__
+
+  The following field is required in the post body request. If any required fields are missing or include invalid data an error will be returned (see [error handling](#error-handling)).
+
+  * student_comments = string
+
+__** If existing student comments are removed please send a nil value.__
+
+  Example json request body
+  ```json
+  {
+    "student_comments": "Me-Mow ate my homework. I swear!"
+  }
+  ```
+
+Example json response
+  ```json
+  {
+    "data": {
+      "id": "1",
+      "type": "projects",
+      "attributes": {
+        "mod": "1",
+        "student_projects": [
+          {
+            "id": "109",
+            "name": "war or peace",
+            "program": "BE",
+            "project_number": "1",
+            "project_type": "solo",
+            "is_final_project": false,
+            "average_score": "2.75",
+            "instructor_comments": "Some real good stuff.",
+            "student_comments": "Me-Mow ate my homework. I swear!",
+            "project_feedback": [
+              {
+                "id": "1",
+                "rubric_category_name": "Code Quality",
+                "score": 2.5,
+                "comment": "Overall good work. I suggest researching enums more."
+              },
+              {
+                "id": "2",
+                "rubric_category_name": "Completion",
+                "score": 3.0,
+                "comment": null
+              },
+              {
+                "id": "3",
+                "rubric_category_name": "Testing",
+                "score": 2.5,
+                "comment": "Ensure you are testing for all scenarios."
+              },
+              {
+                "id": "4",
+                "rubric_category_name": "OOP Principles",
+                "score": 3.0,
+                "comment": null
+              }
+            ]
+          }
+        ]
       }
     }
   }
@@ -209,26 +240,44 @@ The request provides the student's (name and id) for a given instructor who teac
     ]
   }
   ```
-### Update Student Project Comments
-`PATCH /api/v1/students/:student_id/student_projects/:id`
 
-The request updates the student project record with personal student comments that are new, updated or removed. If the student id or project id in the route are missing, or invalid, an error will be returned (see [error handling](#error-handling)).
+### Student Project Rubric Categories
+`GET /api/v1/instructors/:instructor_id/instructor_students/:student_id/project_templates?mod=1&project_number=2`
+
+The request returns a list of the rubric categories for a given student's mod project.
 * __Required__
 
-  The following field is required in the post body request. If any required fields are missing or include invalid data an error will be returned (see [error handling](#error-handling)).
-
-  * student_comments = string
-
-__** If existing student comments are removed please send a nil value.__
+  The following query parameters are required. If any required fields are missing or include invalid data an error will be returned (see [error handling](#error-handling)).
+  * mod = integer
+  * project_number = integer
 
   Example json request body
   ```json
   {
-    "student_comments": "Me-Mow ate my homework. I swear!"
+    "student_id": 71,
+    "project_template_id": 99,
+    "mod": 1,
+    "project_number": 2,
+    "rubric_template": [
+      {
+        "rubric_category_template_id": 1,
+        "rubric_category_name": "ActiveRecord"
+      },
+      {
+        "rubric_category_template_id": 2,
+        "rubric_category_name": "Rails"
+      },
+      {
+        "rubric_category_template_id": 3,
+        "rubric_category_name": "Feature Completeness"
+      },
+      {
+        "rubric_category_template_id": 4,
+        "rubric_category_name": "Testing"
+      }
+    ]
   }
   ```
-
-The response is the same as the [Student Projects By Mod](#student-projects-by-mod).
 
 ### Instructor Create Project Feedback
 `POST /api/v1/student_projects`

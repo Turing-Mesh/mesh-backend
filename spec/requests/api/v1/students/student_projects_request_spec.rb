@@ -12,7 +12,7 @@ RSpec.describe 'Student projects request', type: :request do
         get "/api/v1/students/#{@student.id}/student_projects?mod=#{mod}"
 
         json = JSON.parse(response.body, symbolize_names:true)
-
+        
         expect(response).to be_successful
         expect(json).to be_a(Hash)
         expect(json[:data]).to be_a(Hash)
