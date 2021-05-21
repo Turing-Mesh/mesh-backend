@@ -27,4 +27,6 @@ class User < ApplicationRecord
         student.user_profile if student.user_profile.current_mod == mod_num
       end.compact
   end
+
+ 
 end
