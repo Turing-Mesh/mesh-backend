@@ -7,12 +7,12 @@ class ProjectRubric
               :rubric_template
 
   def initialize(params)
-    @id = project(data)[0].id
-    @student_id = student(data).user.id
-    @project_template_id = project(data)[0].id
-    @mod = student(data).current_mod
-    @project_number = project(data)[0].project_number
-    @rubric_template = print_rubric(RubricTemplate.find(project(data)[0].rubric_template_id).rubric_template_categories)
+    @id = project(params)[0].id
+    @student_id = student(params).user.id
+    @project_template_id = project(params)[0].id
+    @mod = student(params).current_mod
+    @project_number = project(params)[0].project_number
+    @rubric_template = print_rubric(RubricTemplate.find(project(params)[0].rubric_template_id).rubric_template_categories)
   end
 
 
