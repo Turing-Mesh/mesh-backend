@@ -86,9 +86,20 @@ describe 'Instructor Students request' do
     let!(:sad_path_body) { {
         first_name: "#{@student_1_profile.first_name[0]}"
       }}
+
+      let!(:edge_path_body) { {
+        
+      }}
     it "needs 2 or more characters to search" do
       post api_v1_instructor_instructor_students_search_path(@instructor.id), headers: headers, params: sad_path_body, as: :json
       json = JSON.parse(response.body, symbolize_names: true)
+      expect(json[:data]).to eq "Invalid Search Terms"
+    end
+
+    it "needs required parameters" do
+      post api_v1_instructor_instructor_students_search_path(@instructor.id), headers: headers, params: edge_path_body, as: :json
+      json = JSON.parse(response.body, symbolize_names: true)
+      expect(json[:data]).to eq "Invalid Query Parameters"
     end
   end
 end
