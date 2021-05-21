@@ -7,9 +7,12 @@ Rails.application.routes.draw do
       end
 
       resources :instructors, only: [] do
-        resources :instructor_students, only: :index , as: 'students'
         post '/instructor_students/search', to: 'instructor_students#show'
+        resources :instructor_students, only: :index, as: 'students'
+          resources :instructor_students, only: [] do
+            resources :project_templates, only: %i[index]
+          end
+        end
       end
-    end
   end
 end

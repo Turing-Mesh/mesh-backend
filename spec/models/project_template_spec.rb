@@ -66,4 +66,25 @@ RSpec.describe ProjectTemplate, type: :model do
       expect(project_template.is_final).to_not eq(false)
     end
   end
+
+  describe "class methods" do
+    describe "::get_project" do
+      it "returns a project that matches a specific program and mod" do
+        rubric_template = create(:rubric_template)
+        project = create(:project_template, program: "FE", mod: "3", project_number: "1", rubric_template_id: rubric_template.id)
+        project_2 = create(:project_template, program: "BE", rubric_template_id: rubric_template.id)
+        project_3 = create(:project_template, program: "BE", rubric_template_id: rubric_template.id)
+        program = "FE"
+        mod = "3"
+        project_number = "1"
+
+        expect(ProjectTemplate.get_project(program, mod, project_number)[0]).to eq(project)
+        expect(ProjectTemplate.get_project(program, mod, project_number)[0].program).to eq(project.program)
+        expect(ProjectTemplate.get_project(program, mod, project_number)[0].mod).to eq(project.mod)
+        expect(ProjectTemplate.get_project(program, mod, project_number)[0].project_number).to eq(project.project_number)
+        expect(ProjectTemplate.get_project(program, mod, project_number)[0].program).to_not eq(project_2.program)
+        expect(ProjectTemplate.get_project(program, mod, project_number)[0].program).to_not eq(project_3.program)
+      end
+    end
+  end
 end
