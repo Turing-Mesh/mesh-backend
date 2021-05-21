@@ -18,9 +18,12 @@ class ApplicationController < ActionController::API
   private
 
   def validate_id
-    id = :"#{params.keys.grep(/id/)[0]}"
-    error = "String not accepted as id"
-    render_error(error) if params[id].to_i == 0
+    keys = params.keys.find_all {|key| key.include?("id")}
+    keys.each do |key|
+      id = :"#{key}"
+      error = "String not accepted as id"
+      render_error(error) if params[id].to_i == 0
+    end
   end
 
   def validate_mod

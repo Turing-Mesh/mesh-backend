@@ -86,5 +86,7 @@ RSpec.describe User, type: :model do
       expect(instructor.get_students("3")).to eq ([]) 
 
     end
+
+    
   end
 end
