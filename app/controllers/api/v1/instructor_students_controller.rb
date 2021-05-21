@@ -6,8 +6,9 @@ class Api::V1::InstructorStudentsController < ApplicationController
   end
 
   def show
+    return json_response({data: "Invalid Query Parameters"}, 400) if (!params.has_key?(:first_name) && !params.has_key?(:last_name) )
     instructor = User.find(params[:instructor_id]).user_profile
-    students = instructor.find_students(params[:first_name], params[:last_name])
+    students = UserProfile.find_students(params[:first_name], params[:last_name])
     json_response(StudentSerializer.new(students))
   end
 end

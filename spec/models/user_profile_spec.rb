@@ -64,7 +64,7 @@ RSpec.describe UserProfile, type: :model do
       student_profile = create(:user_profile, user_id: student.id, current_mod: "2", starting_cohort: "2010", current_cohort: "2010", status: 0)
       instructor_profile = create(:user_profile, user_id: instructor.id, current_mod: "2")
 
-      actual = instructor_profile.find_students(student_profile.first_name,student_profile.last_name)
+      actual = UserProfile.find_students(student_profile.first_name,student_profile.last_name)
       expect(actual.first.class).to eq UserProfile
       expect(actual.first.first_name).to eq student_profile.first_name
     end
