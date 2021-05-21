@@ -34,4 +34,16 @@ class ApplicationController < ActionController::API
     return true if params[:mod].to_i == 0
     return true if (params[:mod].to_i < 0 || params[:mod].to_i > 4)
   end
+
+  def validate_project
+    error = "Project_number parameter is missing or invalid"
+    render_error(error) if invalid_project
+  end
+
+  def invalid_project
+    return true if params[:project_number].nil?
+    return true if params[:project_number].empty?
+    return true if params[:project_number].to_i == 0
+    return true if (params[:project_number].to_i < 0 || params[:project_number].to_i > 4)
+  end
 end
