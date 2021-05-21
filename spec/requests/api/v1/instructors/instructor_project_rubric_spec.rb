@@ -108,17 +108,18 @@ RSpec.describe 'Instructor Project Rubric Request' do
       expect(response.status).to eq(400)
     end
     it "instructor and student id must exists in our database" do
-      get "/api/v1/instructors/5/instructor_students/#{@student.id}/project_templates?mod=2&project_number=2"
+      id = 999999
+      get "/api/v1/instructors/#{id}/instructor_students/#{@student.id}/project_templates?mod=2&project_number=2"
       project_rubric = JSON.parse(response.body, symbolize_names: true)
       expect(project_rubric).to_not have_key(:message)
       expect(project_rubric).to have_key(:error)
-      expect(project_rubric[:error]).to eq("Couldn't find User with 'id'=5")
+      expect(project_rubric[:error]).to eq("Couldn't find User with 'id'=#{id}")
       expect(response.status).to eq(404)
-      get "/api/v1/instructors/#{@instructor.id}/instructor_students/0/project_templates?mod=2&project_number=2"
+      get "/api/v1/instructors/#{@instructor.id}/instructor_students/#{id}/project_templates?mod=2&project_number=2"
       project_rubric = JSON.parse(response.body, symbolize_names: true)
       expect(project_rubric).to_not have_key(:message)
       expect(project_rubric).to have_key(:error)
-      expect(project_rubric[:error]).to eq("Couldn't find User with 'id'=0")
+      expect(project_rubric[:error]).to eq("Couldn't find User with 'id'=#{id}")
       expect(response.status).to eq(404)
     end
   end
