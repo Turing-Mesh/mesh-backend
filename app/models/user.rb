@@ -23,9 +23,9 @@ class User < ApplicationRecord
   has_one :user_profile
 
   def get_students(mod_num)
-      students.map do |student|
-        student.user_profile if student.user_profile.current_mod == mod_num
-      end.compact
+    students.map do |student|
+      student.user_profile if student.user_profile.current_mod == mod_num
+    end.compact
   end
 
  
