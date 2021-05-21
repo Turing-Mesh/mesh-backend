@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ProjectRubric do
-  it "exists" do
+  before :each do
     @student = create(:user, role: 0)
     @student_2 = create(:user, role: 0)
     @instructor = create(:user, role: 1)
@@ -19,16 +19,17 @@ RSpec.describe ProjectRubric do
     @project_2 = create(:student_project, student_id: @student.id, project_template_id: @project_template_2.id)
 
     data = {instructor_student_id: @student.id, mod: "2", project_number: "2", }
-    project_rubric = ProjectRubric.new(data)
-
-    expect(project_rubric).to be_a ProjectRubric
-    expect(project_rubric.mod).to be_a String
-    expect(project_rubric.project_number).to be_a String
-    expect(project_rubric.rubric_template).to be_an Array
-    expect(project_rubric.rubric_template.length).to eq(@mod2_rubric.rubric_categories.length)
-    expect(project_rubric.project_number).to eq(@project_template_2.project_number)
-    expect(project_rubric.mod).to eq(@project_template_2.mod)
-    expect(project_rubric.student_id).to eq(@student.id)
-    expect(project_rubric.student_id).to_not eq(@student_2.id)
+    @project_rubric = ProjectRubric.new(data)
+  end
+  it "exists" do
+    expect(@project_rubric).to be_a ProjectRubric
+    expect(@project_rubric.mod).to be_a String
+    expect(@project_rubric.project_number).to be_a String
+    expect(@project_rubric.rubric_template).to be_an Array
+    expect(@project_rubric.rubric_template.length).to eq(@mod2_rubric.rubric_categories.length)
+    expect(@project_rubric.project_number).to eq(@project_template_2.project_number)
+    expect(@project_rubric.mod).to eq(@project_template_2.mod)
+    expect(@project_rubric.student_id).to eq(@student.id)
+    expect(@project_rubric.student_id).to_not eq(@student_2.id)
   end
 end
