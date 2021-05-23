@@ -15,62 +15,99 @@ ActiveRecord::Base.connection.tables.each do |t|
 end
 
 #students
-students = FactoryBot.create_list(:user, 185, role: 0)
+students = FactoryBot.create_list(:user, 105, role: 0)
 #BE student user profiles
-profiles_mod1_be = Array(164..185).map do |n|
+profiles_mod1_be = Array(94..105).each do |n|
   FactoryBot.create(:user_profile, user_id: n, current_mod: "1", starting_cohort: "2105", current_cohort: "2105", status: 0, program: "BE")
 end
-profiles_mod2_be = Array(118..142).each do |n|
+profiles_mod2_be = Array(68..82).each do |n|
   FactoryBot.create(:user_profile, user_id: n, current_mod: "2", starting_cohort: "2103", current_cohort: "2103", status: 0, program: "BE")
 end
-profiles_mod3_be = Array(71..93).each do |n|
+profiles_mod3_be = Array(41..53).each do |n|
   FactoryBot.create(:user_profile, user_id: n, current_mod: "3", starting_cohort: "2102", current_cohort: "2102", status: 0, program: "BE")
 end
-profiles_mod4_be = Array(24..48).each do |n|
+profiles_mod4_be = Array(14..28).each do |n|
   FactoryBot.create(:user_profile, user_id: n, current_mod: "4", starting_cohort: "2011", current_cohort: "2011", status: 0, program: "BE")
 end
 #FE student user profiles
-profiles_mod1_fe = Array(143..163).each do |n|
+profiles_mod1_fe = Array(83..93).each do |n|
   FactoryBot.create(:user_profile, user_id: n, current_mod: "1", starting_cohort: "2105", current_cohort: "2105", status: 0, program: "FE")
 end
-profiles_mod2_fe = Array(94..117).each do |n|
+profiles_mod2_fe = Array(54..67).each do |n|
   FactoryBot.create(:user_profile, user_id: n, current_mod: "2", starting_cohort: "2103", current_cohort: "2103", status: 0, program: "FE")
 end
-profiles_mod3_fe = Array(49..70).each do |n|
+profiles_mod3_fe = Array(29..40).each do |n|
   FactoryBot.create(:user_profile, user_id: n, current_mod: "3", starting_cohort: "2102", current_cohort: "2102", status: 0, program: "FE")
 end
-profiles_mod4_fe = Array(1..23).each do |n|
+profiles_mod4_fe = Array(1..13).each do |n|
   FactoryBot.create(:user_profile, user_id: n, current_mod: "4", starting_cohort: "2011", current_cohort: "2011", status: 0, program: "FE")
 end
 
 #instructors
-instructors = FactoryBot.create_list(:user, 25, role: 1)
+instructors = FactoryBot.create_list(:user, 20, role: 1)
 #BE instructor user profiles
-profiles_mod1_be_instr = Array(202..204).each do |n|
+profiles_mod1_be_instr = Array(122..124).each do |n|
   FactoryBot.create(:user_profile, user_id: n, current_mod: "1", program: "BE")
 end
-profiles_mod2_be_instr = Array(196..198).each do |n|
+profiles_mod2_be_instr = Array(116..118).each do |n|
   FactoryBot.create(:user_profile, user_id: n, current_mod: "2", program: "BE")
 end
-profiles_mod3_be_instr = Array(192..193).each do |n|
+profiles_mod3_be_instr = Array(112..113).each do |n|
   FactoryBot.create(:user_profile, user_id: n, current_mod: "3", program: "BE")
 end
-profiles_mod4_instr = Array(186..189).each do |n|
+profiles_mod4_instr = Array(106..109).each do |n|
   FactoryBot.create(:user_profile, user_id: n, current_mod: "4", program: "Combined")
 end
 #FE instructor user profiles
-profiles_mod1_fe_instr = Array(199..201).each do |n|
+profiles_mod1_fe_instr = Array(119..121).each do |n|
   FactoryBot.create(:user_profile, user_id: n, current_mod: "1", program: "FE")
 end
-profiles_mod2_fe_instr = Array(194..195).each do |n|
+profiles_mod2_fe_instr = Array(114..115).each do |n|
   FactoryBot.create(:user_profile, user_id: n, current_mod: "2", program: "FE")
 end
-profiles_mod3_fe_instr = Array(190..191).each do |n|
+profiles_mod3_fe_instr = Array(110..111).each do |n|
   FactoryBot.create(:user_profile, user_id: n, current_mod: "3", program: "FE")
 end
-#Other instructor user profiles
-profiles_other_instr = Array(205..210).each do |n|
-  FactoryBot.create(:user_profile, user_id: n, current_mod: "Float", program: "Other")
+
+profiles_mod1_be_instr.each do |instructor|
+  profiles_mod1_be.each do |student|
+    FactoryBot.create(:instructor_student, instructor_id: instructor, student_id: student)
+  end
+end
+profiles_mod2_be_instr.each do |instructor|
+  profiles_mod2_be.each do |student|
+    FactoryBot.create(:instructor_student, instructor_id: instructor, student_id: student)
+  end
+end
+profiles_mod3_be_instr.each do |instructor|
+  profiles_mod3_be.each do |student|
+    FactoryBot.create(:instructor_student, instructor_id: instructor, student_id: student)
+  end
+end
+profiles_mod4_instr.each do |instructor|
+  profiles_mod4_be.each do |student|
+    FactoryBot.create(:instructor_student, instructor_id: instructor, student_id: student)
+  end
+end
+profiles_mod1_fe_instr.each do |instructor|
+  profiles_mod1_fe.each do |student|
+    FactoryBot.create(:instructor_student, instructor_id: instructor, student_id: student)
+  end
+end
+profiles_mod2_fe_instr.each do |instructor|
+  profiles_mod2_fe.each do |student|
+    FactoryBot.create(:instructor_student, instructor_id: instructor, student_id: student)
+  end
+end
+profiles_mod3_fe_instr.each do |instructor|
+  profiles_mod3_fe.each do |student|
+    FactoryBot.create(:instructor_student, instructor_id: instructor, student_id: student)
+  end
+end
+profiles_mod4_instr.each do |instructor|
+  profiles_mod4_fe.each do |student|
+    FactoryBot.create(:instructor_student, instructor_id: instructor, student_id: student)
+  end
 end
 
 test = FactoryBot.create(:rubric_category, name: "Testing/Test Driven Development")
@@ -159,14 +196,14 @@ stretch = FactoryBot.create(:project_template, mod: "3", project_number: "2", ru
 niche_audience = FactoryBot.create(:project_template, mod: "3", project_number: "3", rubric_template_id: rubric_11.id, name: "Niche Audience", program: "FE", project_type: 2)
 ideas = FactoryBot.create(:project_template, mod: "3", project_number: "4", rubric_template_id: rubric_12.id, name: "Ideas-4-Ideaboxes", program: "FE", is_final: true, project_type: 0)
 #Mod 4
-capstone_be = FactoryBot.create(:project_template, mod: "4", project_number: "1", rubric_template_id: rubric_7.id, name: "Capstone", program: "BE", project_type: 2)
-capstone_fe = FactoryBot.create(:project_template, mod: "4", project_number: "1", rubric_template_id: rubric_13.id, name: "Capstone", program: "FE", project_type: 2)
+capstone_be = FactoryBot.create(:project_template, mod: "4", project_number: "1", rubric_template_id: rubric_7.id, name: "Capstone", program: "BE", project_type: 2, is_final: true)
+capstone_fe = FactoryBot.create(:project_template, mod: "4", project_number: "1", rubric_template_id: rubric_13.id, name: "Capstone", program: "FE", project_type: 2, is_final: true)
 
 # Be 1 Mod 1 Project 1
 profiles_mod1_be.each do |student|
-  FactoryBot.create(:student_project, student_id: student.user_id, project_template_id: war_and_peace.id)
-  FactoryBot.create(:student_project, student_id: student.user_id, project_template_id: battleship.id)
-  FactoryBot.create(:student_project, student_id: student.user_id, project_template_id: black_thursday.id)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: war_and_peace.id)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: battleship.id)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: black_thursday.id)
 end
 profiles_mod2_be.each do |student|
   FactoryBot.create(:student_project, student_id: student, project_template_id: war_and_peace.id)
@@ -252,7 +289,7 @@ profiles_mod4_fe.each do |student|
   FactoryBot.create(:student_project, student_id: student, project_template_id: capstone_fe.id)
 end
 
-be_instr_ids = [[202, 203, 204], [196, 197, 198], [192, 193], [188, 189]]
+be_instr_ids = [[122, 123, 124], [116, 117, 118], [112, 113], [106, 107, 108, 109]]
 # BE Mod 1 project feedback for students in Mod 2+
 StudentProject
 .joins(:project_template, user: :user_profile)
@@ -260,7 +297,7 @@ StudentProject
 .where.not("user_profiles.current_cohort = '2105'")
 .each do |project|
   project.rubric_template_categories.each do |category|
-    FactoryBot.create(:project_feedback, instructor_id: be_instr_ids[0].sample, project_id: project.student_id, rubric_template_category_id: category.id)
+    FactoryBot.create(:project_feedback, instructor_id: be_instr_ids[0].sample, project_id: project.id, rubric_template_category_id: category.id)
   end
 end
 # BE Mod 1 project feedback for students in Mod 1
@@ -271,7 +308,7 @@ end
   .where("user_profiles.current_cohort = '2105'")
   .each do |project|
     project.rubric_template_categories.each do |category|
-      FactoryBot.create(:project_feedback, instructor_id: be_instr_ids[0].sample, project_id: project.student_id, rubric_template_category_id: category.id)
+      FactoryBot.create(:project_feedback, instructor_id: be_instr_ids[0].sample, project_id: project.id, rubric_template_category_id: category.id)
     end
   end
 end
@@ -282,7 +319,7 @@ StudentProject
 .where.not("user_profiles.current_cohort = '2103'")
 .each do |project|
   project.rubric_template_categories.each do |category|
-    FactoryBot.create(:project_feedback, instructor_id: be_instr_ids[1].sample, project_id: project.student_id, rubric_template_category_id: category.id)
+    FactoryBot.create(:project_feedback, instructor_id: be_instr_ids[1].sample, project_id: project.id, rubric_template_category_id: category.id)
   end
 end
 # BE Mod 2 project feedback for students in Mod 2
@@ -293,7 +330,7 @@ end
   .where("user_profiles.current_cohort = '2103'")
   .each do |project|
     project.rubric_template_categories.each do |category|
-      FactoryBot.create(:project_feedback, instructor_id: be_instr_ids[1].sample, project_id: project.student_id, rubric_template_category_id: category.id)
+      FactoryBot.create(:project_feedback, instructor_id: be_instr_ids[1].sample, project_id: project.id, rubric_template_category_id: category.id)
     end
   end
 end
@@ -304,7 +341,7 @@ StudentProject
 .where.not("user_profiles.current_cohort = '2102'")
 .each do |project|
   project.rubric_template_categories.each do |category|
-    FactoryBot.create(:project_feedback, instructor_id: be_instr_ids[2].sample, project_id: project.student_id, rubric_template_category_id: category.id)
+    FactoryBot.create(:project_feedback, instructor_id: be_instr_ids[2].sample, project_id: project.id, rubric_template_category_id: category.id)
   end
 end
 # BE Mod 3 project feedback for students in Mod 3
@@ -315,7 +352,7 @@ end
   .where("user_profiles.current_cohort = '2102'")
   .each do |project|
     project.rubric_template_categories.each do |category|
-      FactoryBot.create(:project_feedback, instructor_id: be_instr_ids[2].sample, project_id: project.student_id, rubric_template_category_id: category.id)
+      FactoryBot.create(:project_feedback, instructor_id: be_instr_ids[2].sample, project_id: project.id, rubric_template_category_id: category.id)
     end
   end
 end
@@ -325,11 +362,11 @@ StudentProject
 .where("project_templates.mod = '4' and project_templates.program = 'BE'")
 .each do |project|
   project.rubric_template_categories.each do |category|
-    FactoryBot.create(:project_feedback, instructor_id: be_instr_ids[3].sample, project_id: project.student_id, rubric_template_category_id: category.id)
+    FactoryBot.create(:project_feedback, instructor_id: be_instr_ids[3].sample, project_id: project.id, rubric_template_category_id: category.id)
   end
 end
 
-fe_instr_ids = [[199, 200, 201], [194, 195], [190, 191], [186, 187]]
+fe_instr_ids = [[119, 120, 121], [114, 115], [110, 111], [106, 107, 108, 109]]
 # FE Mod 1 project feedback for students in Mod 2+
 StudentProject
 .joins(:project_template, user: :user_profile)
@@ -337,7 +374,7 @@ StudentProject
 .where.not("user_profiles.current_cohort = '2105'")
 .each do |project|
   project.rubric_template_categories.each do |category|
-    FactoryBot.create(:project_feedback, instructor_id: fe_instr_ids[0].sample, project_id: project.student_id, rubric_template_category_id: category.id)
+    FactoryBot.create(:project_feedback, instructor_id: fe_instr_ids[0].sample, project_id: project.id, rubric_template_category_id: category.id)
   end
 end
 # FE Mod 1 project feedback for students in Mod 1
@@ -348,7 +385,7 @@ end
   .where("user_profiles.current_cohort = '2105'")
   .each do |project|
     project.rubric_template_categories.each do |category|
-      FactoryBot.create(:project_feedback, instructor_id: fe_instr_ids[0].sample, project_id: project.student_id, rubric_template_category_id: category.id)
+      FactoryBot.create(:project_feedback, instructor_id: fe_instr_ids[0].sample, project_id: project.id, rubric_template_category_id: category.id)
     end
   end
 end
@@ -359,7 +396,7 @@ StudentProject
 .where.not("user_profiles.current_cohort = '2103'")
 .each do |project|
   project.rubric_template_categories.each do |category|
-    FactoryBot.create(:project_feedback, instructor_id: fe_instr_ids[1].sample, project_id: project.student_id, rubric_template_category_id: category.id)
+    FactoryBot.create(:project_feedback, instructor_id: fe_instr_ids[1].sample, project_id: project.id, rubric_template_category_id: category.id)
   end
 end
 # FE Mod 2 project feedback for students in Mod 2
@@ -370,7 +407,7 @@ end
   .where("user_profiles.current_cohort = '2103'")
   .each do |project|
     project.rubric_template_categories.each do |category|
-      FactoryBot.create(:project_feedback, instructor_id: fe_instr_ids[1].sample, project_id: project.student_id, rubric_template_category_id: category.id)
+      FactoryBot.create(:project_feedback, instructor_id: fe_instr_ids[1].sample, project_id: project.id, rubric_template_category_id: category.id)
     end
   end
 end
@@ -381,7 +418,7 @@ StudentProject
 .where.not("user_profiles.current_cohort = '2102'")
 .each do |project|
   project.rubric_template_categories.each do |category|
-    FactoryBot.create(:project_feedback, instructor_id: fe_instr_ids[2].sample, project_id: project.student_id, rubric_template_category_id: category.id)
+    FactoryBot.create(:project_feedback, instructor_id: fe_instr_ids[2].sample, project_id: project.id, rubric_template_category_id: category.id)
   end
 end
 # FE Mod 3 project feedback for students in Mod 3
@@ -392,7 +429,7 @@ end
   .where("user_profiles.current_cohort = '2102'")
   .each do |project|
     project.rubric_template_categories.each do |category|
-      FactoryBot.create(:project_feedback, instructor_id: fe_instr_ids[2].sample, project_id: project.student_id, rubric_template_category_id: category.id)
+      FactoryBot.create(:project_feedback, instructor_id: fe_instr_ids[2].sample, project_id: project.id, rubric_template_category_id: category.id)
     end
   end
 end
@@ -402,7 +439,7 @@ StudentProject
 .where("project_templates.mod = '4' and project_templates.program = 'FE'")
 .each do |project|
   project.rubric_template_categories.each do |category|
-    FactoryBot.create(:project_feedback, instructor_id: fe_instr_ids[3].sample, project_id: project.student_id, rubric_template_category_id: category.id)
+    FactoryBot.create(:project_feedback, instructor_id: fe_instr_ids[3].sample, project_id: project.id, rubric_template_category_id: category.id)
   end
 end
 # reset pk sequences to current max value
