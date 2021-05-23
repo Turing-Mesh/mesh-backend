@@ -2,6 +2,8 @@ class StudentProject < ApplicationRecord
   belongs_to :project_template
   belongs_to :user, foreign_key: :student_id
   has_many :project_feedbacks, foreign_key: :project_id
+  has_one :rubric_template, through: :project_template
+  has_many :rubric_template_categories, through: :rubric_template
 
   validates_presence_of :student_id, :project_template_id
 
