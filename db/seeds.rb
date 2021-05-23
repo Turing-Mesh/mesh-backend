@@ -405,7 +405,6 @@ StudentProject
     FactoryBot.create(:project_feedback, instructor_id: fe_instr_ids[3].sample, project_id: project.student_id, rubric_template_category_id: category.id)
   end
 end
-require "pry"; binding.pry
 # reset pk sequences to current max value
 ActiveRecord::Base.connection.tables.each do |t|
   ActiveRecord::Base.connection.reset_pk_sequence!(t)
