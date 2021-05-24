@@ -11,5 +11,8 @@ class ProjectTemplate < ApplicationRecord
     where('program = ?', program)
     .where('mod = ?', mod)
     .where('project_number = ?', project_number)
+    .order(created_at: :desc)
+    .limit(1)
+    .first
   end
 end

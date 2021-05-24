@@ -70,20 +70,25 @@ RSpec.describe ProjectTemplate, type: :model do
   describe "class methods" do
     describe "::get_project" do
       it "returns a project that matches a specific program and mod" do
+        student = create(:user)
+        profile = create(:user_profile, current_mod: "2", user_id: student.id)
         rubric_template = create(:rubric_template)
-        project = create(:project_template, program: "FE", mod: "3", project_number: "1", rubric_template_id: rubric_template.id)
-        project_2 = create(:project_template, program: "BE", rubric_template_id: rubric_template.id)
-        project_3 = create(:project_template, program: "BE", rubric_template_id: rubric_template.id)
-        program = "FE"
-        mod = "3"
+        project_1 = create(:project_template, mod: '2', project_number: '1', program: "BE", rubric_template_id: rubric_template.id)
+        project_2 = create(:project_template, mod: '2', project_number: '1', program: "BE", rubric_template_id: rubric_template.id)
+        project_3 = create(:project_template, mod: '3', project_number: '1', program: "BE", rubric_template_id: rubric_template.id)
+        project_4 = create(:project_template, mod: '2', project_number: '1', program: "FE", rubric_template_id: rubric_template.id)
         project_number = "1"
+        mod = "2"
 
-        expect(ProjectTemplate.get_project(program, mod, project_number)[0]).to eq(project)
-        expect(ProjectTemplate.get_project(program, mod, project_number)[0].program).to eq(project.program)
-        expect(ProjectTemplate.get_project(program, mod, project_number)[0].mod).to eq(project.mod)
-        expect(ProjectTemplate.get_project(program, mod, project_number)[0].project_number).to eq(project.project_number)
-        expect(ProjectTemplate.get_project(program, mod, project_number)[0].program).to_not eq(project_2.program)
-        expect(ProjectTemplate.get_project(program, mod, project_number)[0].program).to_not eq(project_3.program)
+        results = ProjectTemplate.get_project(profile.program, mod, project_number)
+
+        expect(results.id).to eq(project_2.id)
+        expect(results.program).to eq(profile.program)
+        expect(results.project_number).to eq(project_number)
+        expect(results.mod).to eq(mod)
+        expect(results.id).to_not eq(project_1.id)
+        expect(results.id).to_not eq(project_3.id)
+        expect(results.id).to_not eq(project_4.id)
       end
     end
   end
