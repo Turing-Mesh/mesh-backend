@@ -17,7 +17,7 @@ describe 'Instructor Students request' do
   end
   describe 'happy path' do
     it "returns information about the students under an instructor" do
-      get "/api/v1/instructors/#{@instructor.id}/instructor_students?mod=2"
+      get "/api/v1/instructors/#{@instructor.id}/students?mod=2"
       json = JSON.parse(response.body, symbolize_names: true)
       expect(json[:data].class).to eq Array
       expect(json[:data].first[:type]).to eq "student"
@@ -25,7 +25,7 @@ describe 'Instructor Students request' do
     end
 
     it "returns only the students in the specified mod" do
-      get "/api/v1/instructors/#{@instructor.id}/instructor_students?mod=2"
+      get "/api/v1/instructors/#{@instructor.id}/students?mod=2"
       json = JSON.parse(response.body, symbolize_names: true)
       expect(json[:data].none?{ |student| student[:attributes][:first_name] == @student_3.user_profile.first_name }).to eq true
     end
@@ -35,13 +35,13 @@ describe 'Instructor Students request' do
 
   describe 'sad path' do
     it "should return bad data for missing query parameters" do
-      get "/api/v1/instructors/#{@instructor.id}/instructor_students"
+      get "/api/v1/instructors/#{@instructor.id}/students"
       json = JSON.parse(response.body, symbolize_names: true)
       expect(json[:data]).to eq "Invalid Query Parameters"
     end
 
     it "should be given a correct instructor id" do
-      get "/api/v1/instructors/99999/instructor_students?mod=2"
+      get "/api/v1/instructors/99999/students?mod=2"
       json = JSON.parse(response.body, symbolize_names: true)
       expect(json[:error]).to eq "Couldn't find User with 'id'=99999"
     end

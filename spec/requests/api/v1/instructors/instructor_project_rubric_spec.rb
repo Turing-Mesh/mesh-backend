@@ -32,14 +32,15 @@ RSpec.describe 'Instructor Project Rubric Request' do
   end
   describe "happy path" do
     it "returns rubric categories for the given student, mod, and project number" do
-      get "/api/v1/instructors/#{@instructor.id}/instructor_students/#{@student.id}/project_templates?mod=2&project_number=2"
-      expect(response).to be_successful
+      get "/api/v1/instructors/#{@instructor.id}/students/#{@student.id}/project_templates?mod=2&project_number=2"
+
       project_rubric = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(response).to be_successful
       expect(project_rubric).to have_key(:data)
       expect(project_rubric[:data]).to have_key(:id)
       expect(project_rubric[:data]).to have_key(:type)
       expect(project_rubric[:data][:attributes]).to have_key(:student_id)
-      expect(project_rubric[:data][:attributes]).to have_key(:project_template_id)
       expect(project_rubric[:data][:attributes]).to have_key(:mod)
       expect(project_rubric[:data][:attributes]).to have_key(:project_number)
       expect(project_rubric[:data][:attributes]).to have_key(:rubric_template)
@@ -58,7 +59,7 @@ RSpec.describe 'Instructor Project Rubric Request' do
   end
   describe "sad path" do
     it "needs project_number query parameter" do
-      get "/api/v1/instructors/#{@instructor.id}/instructor_students/#{@student.id}/project_templates?mod=2"
+      get "/api/v1/instructors/#{@instructor.id}/students/#{@student.id}/project_templates?mod=2"
       project_rubric = JSON.parse(response.body, symbolize_names: true)
       expect(project_rubric).to have_key(:message)
       expect(project_rubric).to have_key(:error)
@@ -67,7 +68,7 @@ RSpec.describe 'Instructor Project Rubric Request' do
       expect(response.status).to eq(400)
     end
     it "needs mod query parameter" do
-      get "/api/v1/instructors/#{@instructor.id}/instructor_students/#{@student.id}/project_templates?project_number=2"
+      get "/api/v1/instructors/#{@instructor.id}/students/#{@student.id}/project_templates?project_number=2"
       project_rubric = JSON.parse(response.body, symbolize_names: true)
       expect(project_rubric).to have_key(:message)
       expect(project_rubric).to have_key(:error)
@@ -76,14 +77,14 @@ RSpec.describe 'Instructor Project Rubric Request' do
       expect(response.status).to eq(400)
     end
     it "project number parameter has to be a number in a string between 1 and 4" do
-      get "/api/v1/instructors/#{@instructor.id}/instructor_students/#{@student.id}/project_templates?mod=2&project_number=-1"
+      get "/api/v1/instructors/#{@instructor.id}/students/#{@student.id}/project_templates?mod=2&project_number=-1"
       project_rubric = JSON.parse(response.body, symbolize_names: true)
       expect(project_rubric).to have_key(:message)
       expect(project_rubric).to have_key(:error)
       expect(project_rubric[:message]).to eq("your request cannot be completed")
       expect(project_rubric[:error]).to eq("Project_number parameter is missing or invalid")
       expect(response.status).to eq(400)
-      get "/api/v1/instructors/#{@instructor.id}/instructor_students/#{@student.id}/project_templates?mod=2&project_number=5"
+      get "/api/v1/instructors/#{@instructor.id}/students/#{@student.id}/project_templates?mod=2&project_number=5"
       project_rubric = JSON.parse(response.body, symbolize_names: true)
       expect(project_rubric).to have_key(:message)
       expect(project_rubric).to have_key(:error)
@@ -92,14 +93,14 @@ RSpec.describe 'Instructor Project Rubric Request' do
       expect(response.status).to eq(400)
     end
     it "mod parameter has to be a number in a string between 1 and 4" do
-      get "/api/v1/instructors/#{@instructor.id}/instructor_students/#{@student.id}/project_templates?mod=-1&project_number=2"
+      get "/api/v1/instructors/#{@instructor.id}/students/#{@student.id}/project_templates?mod=-1&project_number=2"
       project_rubric = JSON.parse(response.body, symbolize_names: true)
       expect(project_rubric).to have_key(:message)
       expect(project_rubric).to have_key(:error)
       expect(project_rubric[:message]).to eq("your request cannot be completed")
       expect(project_rubric[:error]).to eq("Mod parameter is missing or invalid")
       expect(response.status).to eq(400)
-      get "/api/v1/instructors/#{@instructor.id}/instructor_students/#{@student.id}/project_templates?mod=5&project_number=2"
+      get "/api/v1/instructors/#{@instructor.id}/students/#{@student.id}/project_templates?mod=5&project_number=2"
       project_rubric = JSON.parse(response.body, symbolize_names: true)
       expect(project_rubric).to have_key(:message)
       expect(project_rubric).to have_key(:error)
@@ -109,13 +110,13 @@ RSpec.describe 'Instructor Project Rubric Request' do
     end
     it "instructor and student id must exists in our database" do
       id = 999999
-      get "/api/v1/instructors/#{id}/instructor_students/#{@student.id}/project_templates?mod=2&project_number=2"
+      get "/api/v1/instructors/#{id}/students/#{@student.id}/project_templates?mod=2&project_number=2"
       project_rubric = JSON.parse(response.body, symbolize_names: true)
       expect(project_rubric).to_not have_key(:message)
       expect(project_rubric).to have_key(:error)
       expect(project_rubric[:error]).to eq("Couldn't find User with 'id'=#{id}")
       expect(response.status).to eq(404)
-      get "/api/v1/instructors/#{@instructor.id}/instructor_students/#{id}/project_templates?mod=2&project_number=2"
+      get "/api/v1/instructors/#{@instructor.id}/students/#{id}/project_templates?mod=2&project_number=2"
       project_rubric = JSON.parse(response.body, symbolize_names: true)
       expect(project_rubric).to_not have_key(:message)
       expect(project_rubric).to have_key(:error)
