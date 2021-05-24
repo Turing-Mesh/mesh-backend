@@ -6,7 +6,7 @@ class ProjectRubric
               :rubric_template
 
   def initialize(params)
-    @project = get_project(params)
+    @project ||= get_project(params)
     @id = @project.id
     @student_id = params[:student_id].to_i
     @mod = params[:mod]

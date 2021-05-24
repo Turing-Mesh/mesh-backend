@@ -6,12 +6,10 @@
 | ---------- | ------ | -------- | ------:|
 | GET | /api/v1/students/:student_id/student_projects?mod=1 | Get all of the project feedback for single student and a single mod | [json](#student-projects-by-mod) |
 | PATCH | /api/v1/students/:student_id/student_projects/:id | Update student's project with personal comments | [json](#students-update-project) |
-| GET | /api/v1/instructors/:instructor_id/instructor_students/:student_id/project_templates?mod=1&project_number=2 | Get a mod project template and rubric categories | [json](#student-project-rubric-categories) |
-| GET | /api/v1/instructors/:instructor_id/instructor_students?mod=1 | Get all of the student names and ids for instructor's current mod | [json](#instructor-module-students) |
+| GET | /api/v1/instructors/:instructor_id/students?mod=1 | Get all of the student names and ids for instructor's current mod | [json](#instructor-module-students) |
 | POST | /api/v1/instructors/:instructor_id/students/search | Instructors search for student's by name  | [json](#instructor-students-search) |
-| POST | /api/v1/student_projects | Instructor create student_project and related project_feedback records | [json](#instructor-create-project-feedback) |
-| POST | /api/v1/users | Registration new user  | [json](#user-registration) |
-| POST | /api/v1/sessions | Login a user | [json](#sessions-create) |
+| GET | /api/v1/instructors/:instructor_id/students/:student_id/project_templates?mod=1&project_number=2 | Get a mod project template and rubric categories | [json](#student-project-rubric-categories) |
+| POST | /api/v1/instructors/:instructor_id/students/:student_id/student_projects | Instructor create student_project and related project_feedback records | [json](#instructor-create-project-feedback) |
 | ERROR | errors | Error handling for requests | [json](#error-handling) |
 
 ## JSON Responses
@@ -202,7 +200,7 @@ Example json response
   ```
 
 ### Instructor Students
-`GET /api/v1/instructor/:instructor_id/instructor_students?mod=x`
+`GET /api/v1/instructor/:instructor_id/students?mod=x`
 
 The request provides the student's (name and id) for a given instructor who teaches a given module
 * __Required__
@@ -212,7 +210,7 @@ The request provides the student's (name and id) for a given instructor who teac
 
  Example json response with projects
 
-  `GET /api/v1/instructor/1/instructor_students?mod=2`
+  `GET /api/v1/instructor/1/students?mod=2`
 
   ```json
   {
@@ -242,7 +240,7 @@ The request provides the student's (name and id) for a given instructor who teac
   ```
 
 ### Student Project Rubric Categories
-`GET /api/v1/instructors/:instructor_id/instructor_students/:student_id/project_templates?mod=1&project_number=2`
+`GET /api/v1/instructors/:instructor_id/students/:student_id/project_templates?mod=1&project_number=2`
 
 The request returns a list of the rubric categories for a given student's mod project.
 * __Required__
@@ -283,7 +281,7 @@ The request returns a list of the rubric categories for a given student's mod pr
   ```
 
 ### Instructor Students Search
-`POST /api/v1/instructor/:instructor_id/instructor_students/search`
+`POST /api/v1/instructor/:instructor_id/students/search`
 
 The request provides all of the *currently enrolled* student's name and id based on a search for either their first name or last name.
 
@@ -291,7 +289,7 @@ The request provides all of the *currently enrolled* student's name and id based
  * Request body must contain a `search_term` key with value(s) `first_name` or `last_name` (or both).
 
  Example json request with body
- `POST /api/v1/instructor/1/instructor_students/search`
+ `POST /api/v1/instructor/1/students/search`
  ```json
   {
     "first_name": "Aid",
@@ -321,13 +319,13 @@ The request provides all of the *currently enrolled* student's name and id based
 ```
 
 ### Instructor Create Project Feedback
-`POST /api/v1/student_projects`
+`POST /api/v1/instructors/:instructor_id/students/:student_id/student_projects`
 
 
 The request creates a student project record and related project feedback records for a valid matching instructor id, student id and project template id.
 * __Required__
 
-  The following fields are required in the post body request. If any required fields are missing or include invalid data an error will be returned (see [error handling](#error-handling)).
+  The following fields are required in the route and post body request. If any required fields are missing or include invalid data an error will be returned (see [error handling](#error-handling)).
   * instructor_id = integer
   * student_id = integer
   * project_template_id = integer
@@ -335,10 +333,9 @@ The request creates a student project record and related project feedback record
   * score = float
 
   Example json request body
+  `/api/v1/instructors/10/students/201/student_projects`
   ```json
   {
-    "instructor_id": 10,
-    "student_id": 201,
     "project_template_id": 16,
     "instructor_comments": "Some real good stuff.",
     "project_feedback": [

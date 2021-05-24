@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         post '/students/search', to: 'instructor_students#search', as: 'students_search'
         resources :students, only: :index, controller: :instructor_students do
           resources :project_templates, only: :index
+          resources :student_projects, only: :create
         end
       end
     end
