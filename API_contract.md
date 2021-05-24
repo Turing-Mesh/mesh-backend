@@ -8,7 +8,7 @@
 | PATCH | /api/v1/students/:student_id/student_projects/:id | Update student's project with personal comments | [json](#students-update-project) |
 | GET | /api/v1/instructors/:instructor_id/instructor_students/:student_id/project_templates?mod=1&project_number=2 | Get a mod project template and rubric categories | [json](#student-project-rubric-categories) |
 | GET | /api/v1/instructors/:instructor_id/instructor_students?mod=1 | Get all of the student names and ids for instructor's current mod | [json](#instructor-module-students) |
-| POST | /api/v1/instructors/:instructor_id/instructor_students/search | Instructors search for student's by name  | [json](#instructor-students-search) |
+| POST | /api/v1/instructors/:instructor_id/students/search | Instructors search for student's by name  | [json](#instructor-students-search) |
 | POST | /api/v1/student_projects | Instructor create student_project and related project_feedback records | [json](#instructor-create-project-feedback) |
 | POST | /api/v1/users | Registration new user  | [json](#user-registration) |
 | POST | /api/v1/sessions | Login a user | [json](#sessions-create) |
@@ -251,35 +251,36 @@ The request returns a list of the rubric categories for a given student's mod pr
   * mod = integer
   * project_number = integer
 
-  Example json request body
+  Example json response body
+  `GET /api/v1/instructors/116/students/71/project_templates?mod=2&project_number=2`
   ```json
   {
-    "student_id": 71,
-    "project_template_id": 99,
-    "mod": 1,
-    "project_number": 2,
-    "rubric_template": [
-      {
-        "rubric_category_template_id": 1,
-        "rubric_category_name": "ActiveRecord"
-      },
-      {
-        "rubric_category_template_id": 2,
-        "rubric_category_name": "Rails"
-      },
-      {
-        "rubric_category_template_id": 3,
-        "rubric_category_name": "Feature Completeness"
-      },
-      {
-        "rubric_category_template_id": 4,
-        "rubric_category_name": "Testing"
-      }
-    ]
+   "data": {
+      "id": "99",
+      "student_id": 71,
+      "mod": "2",
+      "project_number": "2",
+      "rubric_template": [
+        {
+          "rubric_category_template_id": 1,
+          "rubric_category_name": "ActiveRecord"
+        },
+        {
+          "rubric_category_template_id": 2,
+          "rubric_category_name": "Rails"
+        },
+        {
+          "rubric_category_template_id": 3,
+          "rubric_category_name": "Feature Completeness"
+        },
+        {
+          "rubric_category_template_id": 4,
+          "rubric_category_name": "Testing"
+        }
+      ]
+    }
   }
   ```
-
-The response is the same as the [Student Projects By Mod](#student-projects-by-mod).
 
 ### Instructor Students Search
 `POST /api/v1/instructor/:instructor_id/instructor_students/search`
@@ -288,14 +289,14 @@ The request provides all of the *currently enrolled* student's name and id based
 
 * __Required__
  * Request body must contain a `search_term` key with value(s) `first_name` or `last_name` (or both).
- Example json request with body
- > POST /api/v1/instructor/1/instructor_students/search 
- ```json 
-{
-  "first_name": "Aid",
-  "last_name": "Zie"
-}
 
+ Example json request with body
+ `POST /api/v1/instructor/1/instructor_students/search`
+ ```json
+  {
+    "first_name": "Aid",
+    "last_name": "Zie"
+  }
  ```
 
 
