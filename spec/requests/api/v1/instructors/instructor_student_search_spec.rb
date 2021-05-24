@@ -13,14 +13,14 @@ describe 'Instructor Students request' do
     instructor_profile = create(:user_profile, user_id: @instructor.id, current_mod: "2")
   end
 
-  let!(:body) { { 
+  let!(:body) { {
       first_name: "#{@student_1_profile.first_name}"
     }}
 
-    
+
   describe 'happy path' do
     it "returns one or more students matching the first name request" do
-      post api_v1_instructor_instructor_students_search_path(@instructor.id), headers: headers, params: body, as: :json
+      post api_v1_instructor_students_search_path(@instructor.id), headers: headers, params: body, as: :json
       json = JSON.parse(response.body, symbolize_names: true)
       expect(json[:data].class).to eq Array
       expect(json[:data].first.keys).to eq [:id, :type, :attributes]
@@ -33,7 +33,7 @@ describe 'Instructor Students request' do
       }}
 
       it "returns one or more students matching the partial first name request" do
-        post api_v1_instructor_instructor_students_search_path(@instructor.id), headers: headers, params: partial_body, as: :json
+        post api_v1_instructor_students_search_path(@instructor.id), headers: headers, params: partial_body, as: :json
         json = JSON.parse(response.body, symbolize_names: true)
         expect(json[:data].class).to eq Array
         expect(json[:data].first.keys).to eq [:id, :type, :attributes]
@@ -44,9 +44,9 @@ describe 'Instructor Students request' do
       let!(:partial_last_body) { {
           last_name: "Aar"
         }}
-  
+
         it "returns one or more students matching the partial last name request" do
-          post api_v1_instructor_instructor_students_search_path(@instructor.id), headers: headers, params: partial_last_body, as: :json
+          post api_v1_instructor_students_search_path(@instructor.id), headers: headers, params: partial_last_body, as: :json
           json = JSON.parse(response.body, symbolize_names: true)
           expect(json[:data].class).to eq Array
           expect(json[:data].first.keys).to eq [:id, :type, :attributes]
@@ -59,7 +59,7 @@ describe 'Instructor Students request' do
       }}
 
     it "returns one or more students matching the last name request" do
-      post api_v1_instructor_instructor_students_search_path(@instructor.id), headers: headers, params: last_name_body, as: :json
+      post api_v1_instructor_students_search_path(@instructor.id), headers: headers, params: last_name_body, as: :json
       json = JSON.parse(response.body, symbolize_names: true)
       expect(json[:data].class).to eq Array
       expect(json[:data].first.keys).to eq [:id, :type, :attributes]
@@ -72,7 +72,7 @@ describe 'Instructor Students request' do
       }}
 
     it "returns one or more students matching the full name request" do
-      post api_v1_instructor_instructor_students_search_path(@instructor.id), headers: headers, params: full_name_body, as: :json
+      post api_v1_instructor_students_search_path(@instructor.id), headers: headers, params: full_name_body, as: :json
       json = JSON.parse(response.body, symbolize_names: true)
       expect(json[:data].class).to eq Array
       expect(json[:data].first.keys).to eq [:id, :type, :attributes]
@@ -88,16 +88,16 @@ describe 'Instructor Students request' do
       }}
 
       let!(:edge_path_body) { {
-        
+
       }}
     it "needs 2 or more characters to search" do
-      post api_v1_instructor_instructor_students_search_path(@instructor.id), headers: headers, params: sad_path_body, as: :json
+      post api_v1_instructor_students_search_path(@instructor.id), headers: headers, params: sad_path_body, as: :json
       json = JSON.parse(response.body, symbolize_names: true)
       expect(json[:data]).to eq "Invalid Search Terms"
     end
 
     it "needs required parameters" do
-      post api_v1_instructor_instructor_students_search_path(@instructor.id), headers: headers, params: edge_path_body, as: :json
+      post api_v1_instructor_students_search_path(@instructor.id), headers: headers, params: edge_path_body, as: :json
       json = JSON.parse(response.body, symbolize_names: true)
       expect(json[:data]).to eq "Invalid Query Parameters"
     end

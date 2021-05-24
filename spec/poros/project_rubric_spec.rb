@@ -18,7 +18,7 @@ RSpec.describe ProjectRubric do
     @project_template_2 = create(:project_template, mod: "2", project_number: "2", rubric_template_id: @mod2_rubric.id)
     @project_2 = create(:student_project, student_id: @student.id, project_template_id: @project_template_2.id)
 
-    data = {instructor_student_id: @student.id, mod: "2", project_number: "2", }
+    data = {student_id: @student.id, mod: "2", project_number: "2", }
     @project_rubric = ProjectRubric.new(data)
   end
   it "exists" do
