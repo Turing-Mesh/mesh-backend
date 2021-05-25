@@ -31,4 +31,14 @@ module Validate
     return true if value.to_i == 0
     return true if (value.to_i < 0 || value.to_i > 4)
   end
+
+  def missing_name_params(required)
+    !required.all? {|key| params.has_key?(key)} ||
+    (!params.has_key?(:first_name) && !params.has_key?(:last_name))
+  end
+
+  def invalid_name_search
+    return true if ((!params[:first_name].nil? && params[:first_name].length == 1) ||
+    (!params[:last_name].nil? && params[:last_name].length == 1))
+  end
 end
