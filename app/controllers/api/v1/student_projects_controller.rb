@@ -18,6 +18,8 @@ class Api::V1::StudentProjectsController < ApplicationController
     end
   end
 
+  private
+
   def required_index
     [:student_id, :mod]
   end

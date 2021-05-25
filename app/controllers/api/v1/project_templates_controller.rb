@@ -9,6 +9,8 @@ class Api::V1::ProjectTemplatesController < ApplicationController
     render_success(ProjectRubricSerializer.new(project_rubric))
   end
 
+  private
+
   def required_index
     [:student_id, :instructor_id, :mod, :project_number]
   end
