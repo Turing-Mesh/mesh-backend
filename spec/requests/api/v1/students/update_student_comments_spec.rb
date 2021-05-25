@@ -10,14 +10,14 @@ RSpec.describe 'Student comments request', type: :request do
         @project_2.update(student_comments: nil)
         expect(@project_2.student_comments).to be_nil
 
-        params = {student_comments: "Me-Mow ate my homework. I swear!"}
+        params = {student_comments: ["Me-Mow ate my homework. I swear!", "I am adding another note"]}
         headers = {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
         patch "/api/v1/students/#{@student.id}/student_projects/#{@project_2.id}", headers: headers, params: params.to_json
 
         json = JSON.parse(response.body, symbolize_names:true)
 
         @project_2.reload
-        expect(@project_2.student_comments).to eq(params[:student_comments])
+        expect(@project_2.student_comments.split("/2C/")).to eq(params[:student_comments])
         expect(response).to be_successful
         expect(json).to be_a(Hash)
         expect(json[:data]).to be_a(Hash)
@@ -35,7 +35,7 @@ RSpec.describe 'Student comments request', type: :request do
         expect(@project_2.student_comments).to_not be_nil
         previous_comment = @project_2.student_comments
 
-        params = {student_comments: "Me-Mow ate my homework. I swear!"}
+        params = {student_comments: ["Me-Mow ate my homework. I swear!"]}
         headers = {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
         patch "/api/v1/students/#{@student.id}/student_projects/#{@project_2.id}", headers: headers, params: params.to_json
 
@@ -43,11 +43,27 @@ RSpec.describe 'Student comments request', type: :request do
 
         @project_2.reload
         expect(@project_2.student_comments).to_not eq(previous_comment)
-        expect(@project_2.student_comments).to eq(params[:student_comments])
+        expect([@project_2.student_comments]).to eq(params[:student_comments])
         expect(response).to be_successful
       end
 
-      it "updates the student comments and removes existing comment if value request is an empty string" do
+      it "updates the student comments with multiple comments and accepts new line" do
+        expect(@project_2.student_comments).to_not be_nil
+        previous_comment = @project_2.student_comments
+
+        params = {student_comments: ["Me-Mow ate my homework. I swear!", "I cannot believe he did!", "He has been \npunished!"]}
+        headers = {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
+        patch "/api/v1/students/#{@student.id}/student_projects/#{@project_2.id}", headers: headers, params: params.to_json
+
+        json = JSON.parse(response.body, symbolize_names:true)
+
+        @project_2.reload
+        expect(@project_2.student_comments).to_not eq(previous_comment)
+        expect(@project_2.student_comments.split("/2C/").to_a).to eq(params[:student_comments])
+        expect(response).to be_successful
+      end
+
+      it "updates the student comments and removes existing comment if value request is nil" do
         expect(@project_2.student_comments).to_not be_nil
         previous_comment = @project_2.student_comments
 
@@ -67,7 +83,7 @@ RSpec.describe 'Student comments request', type: :request do
     describe 'edge case' do
       it "returns an error when the student id is invalid" do
         id = 201
-        params = {student_comments: "Me-Mow ate my homework. I swear!"}
+        params = {student_comments: ["Me-Mow ate my homework. I swear!"]}
         headers = {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
 
         patch "/api/v1/students/#{id}/student_projects/#{@project_2.id}", headers: headers, params: params.to_json
@@ -82,7 +98,7 @@ RSpec.describe 'Student comments request', type: :request do
 
       it "returns an error when the student id is not an integer" do
         id = "puppies"
-        params = {student_comments: "Me-Mow ate my homework. I swear!"}
+        params = {student_comments: ["Me-Mow ate my homework. I swear!"]}
         headers = {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
 
         patch "/api/v1/students/#{id}/student_projects/#{@project_2.id}", headers: headers, params: params.to_json
@@ -97,7 +113,7 @@ RSpec.describe 'Student comments request', type: :request do
 
       it "returns an error when the project id is invalid" do
         id = 201
-        params = {student_comments: "Me-Mow ate my homework. I swear!"}
+        params = {student_comments: ["Me-Mow ate my homework. I swear!"]}
         headers = {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
 
         patch "/api/v1/students/#{@student.id}/student_projects/#{id}", headers: headers, params: params.to_json
@@ -112,7 +128,7 @@ RSpec.describe 'Student comments request', type: :request do
 
       it "returns an error when the project id is not an integer" do
         id = "puppies"
-        params = {student_comments: "Me-Mow ate my homework. I swear!"}
+        params = {student_comments: ["Me-Mow ate my homework. I swear!"]}
         headers = {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
 
         patch "/api/v1/students/#{@student.id}/student_projects/#{id}", headers: headers, params: params.to_json
@@ -130,7 +146,7 @@ RSpec.describe 'Student comments request', type: :request do
         expect(student_2.student_projects.empty?).to eq(true)
         expect(@project_2.student_id).to_not eq(student_2.id)
 
-        params = {student_comments: "Me-Mow ate my homework. I swear!"}
+        params = {student_comments: ["Me-Mow ate my homework. I swear!"]}
         headers = {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
 
         patch "/api/v1/students/#{student_2.id}/student_projects/#{@project_2.id}", headers: headers, params: params.to_json
@@ -144,7 +160,7 @@ RSpec.describe 'Student comments request', type: :request do
       end
 
       it "returns an error when the student_comments attribute is missing" do
-        params = {nope: "Me-Mow ate my homework. I swear!"}
+        params = {nope: ["Me-Mow ate my homework. I swear!"]}
         headers = {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
 
         patch "/api/v1/students/#{@student.id}/student_projects/#{@project_2.id}", headers: headers, params: params.to_json

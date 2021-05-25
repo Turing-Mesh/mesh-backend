@@ -28,8 +28,8 @@ describe StudentProjects, type: :request do
       expect(student_project.average_score).to eq(0.35e1)
       expect(student_project.instructor_comments).to be_a(String)
       expect(student_project.instructor_comments).to eq(@project_2.instructor_comments)
-      expect(student_project.student_comments).to be_a(String)
-      expect(student_project.student_comments).to eq(@project_2.student_comments)
+      expect(student_project.student_comments).to be_an(Array)
+      expect(student_project.student_comments).to eq([@project_2.student_comments])
       expect(student_project.project_feedback).to be_an(Array)
       expect(student_project.project_feedback.count).to eq(5)
 

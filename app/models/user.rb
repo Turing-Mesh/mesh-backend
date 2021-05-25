@@ -23,10 +23,12 @@ class User < ApplicationRecord
   has_one :user_profile
 
   def get_students(mod_num)
-    students.map do |student|
-      student.user_profile if student.user_profile.current_mod == mod_num
-    end.compact
+    students
+    .select('user_profiles.*')
+    .joins(:user_profile)
+    .where('user_profiles.current_mod = ?', mod_num)
+    .order('user_profiles.first_name, user_profiles.last_name')
   end
 
- 
+
 end

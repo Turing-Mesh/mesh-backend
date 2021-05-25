@@ -18,7 +18,9 @@ describe 'Instructor Students request' do
   describe 'happy path' do
     it "returns information about the students under an instructor" do
       get "/api/v1/instructors/#{@instructor.id}/students?mod=2"
+
       json = JSON.parse(response.body, symbolize_names: true)
+
       expect(json[:data].class).to eq Array
       expect(json[:data].first[:type]).to eq "student"
       expect(json[:data].first[:attributes].keys).to eq %i(user_id first_name last_name current_cohort)
@@ -26,7 +28,9 @@ describe 'Instructor Students request' do
 
     it "returns only the students in the specified mod" do
       get "/api/v1/instructors/#{@instructor.id}/students?mod=2"
+
       json = JSON.parse(response.body, symbolize_names: true)
+
       expect(json[:data].none?{ |student| student[:attributes][:first_name] == @student_3.user_profile.first_name }).to eq true
     end
 

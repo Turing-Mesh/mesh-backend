@@ -19,7 +19,7 @@ class StudentProjects
     @is_final_project = data[:is_final_project]
     @average_score = data.average_feedback_score
     @instructor_comments = data[:instructor_comments]
-    @student_comments = data[:student_comments]
+    @student_comments = format_comments(data[:student_comments])
     @project_feedback = get_project_feedback(data)
   end
 
@@ -32,5 +32,9 @@ class StudentProjects
         comment: feedback.comment
       }
     end
+  end
+
+  def format_comments(data)
+    data.split("/2C/").to_a if !data.nil?
   end
 end
