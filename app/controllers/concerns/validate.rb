@@ -41,4 +41,12 @@ module Validate
     return true if ((!params[:first_name].nil? && params[:first_name].length == 1) ||
     (!params[:last_name].nil? && params[:last_name].length == 1))
   end
+
+  def student
+    User.find(params[:student_id])
+  end
+
+  def instructor
+    User.find_by!(id: params[:instructor_id], role: 'instructor')
+  end
 end

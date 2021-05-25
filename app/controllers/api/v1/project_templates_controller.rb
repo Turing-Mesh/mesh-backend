@@ -3,9 +3,7 @@ class Api::V1::ProjectTemplatesController < ApplicationController
 
   def index
     return render_error("Required parameter missing") if missing_params(required_index)
-    student = User.find_by!(id: params[:student_id])
-    instructor = User.find_by!(id: params[:instructor_id], role: 'instructor')
-    project_rubric = ProjectRubric.new(params)
+    project_rubric = ProjectRubric.new(params) if student && instructor
     render_success(ProjectRubricSerializer.new(project_rubric))
   end
 

@@ -135,7 +135,7 @@ RSpec.describe 'Instructor Project Rubric Request' do
       project_rubric = JSON.parse(response.body, symbolize_names: true)
 
       expect(project_rubric).to have_key(:error)
-      expect(project_rubric[:error]).to eq("Couldn't find User")
+      expect(project_rubric[:error]).to eq("Couldn't find User with 'id'=999999")
       expect(response.status).to eq(404)
     end
   end

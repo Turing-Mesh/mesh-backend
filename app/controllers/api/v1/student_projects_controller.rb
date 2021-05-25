@@ -3,8 +3,7 @@ class Api::V1::StudentProjectsController < ApplicationController
 
   def index
     return render_error("Required parameter missing") if missing_params(required_index)
-    student = User.find(params[:student_id])
-    projects = Projects.new(params)
+    projects = Projects.new(params) if student
     render_success(ProjectsSerializer.new(projects))
   end
 
