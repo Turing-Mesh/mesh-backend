@@ -10,11 +10,10 @@ class Api::V1::StudentProjectsController < ApplicationController
   def update
     return render_error("Required parameter missing") if missing_params(required_update)
     project = StudentProject.find_by!(id: params[:id], student_id: params[:student_id])
-    if project.update(student_comments_params)
-      params[:mod] = project.project_template.mod
-      projects = Projects.new(params)
-      render_success(ProjectsSerializer.new(projects))
-    end
+    project.update(student_comments_params)
+    params[:mod] = project.project_template.mod
+    projects = Projects.new(params)
+    render_success(ProjectsSerializer.new(projects))
   end
 
   private

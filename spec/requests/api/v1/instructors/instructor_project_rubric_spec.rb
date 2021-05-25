@@ -119,6 +119,7 @@ RSpec.describe 'Instructor Project Rubric Request' do
       expect(project_rubric[:error]).to eq("Mod parameter is missing or invalid")
       expect(response.status).to eq(400)
     end
+
     it "instructor and student id must exists in our database" do
       id = 999999
 
@@ -137,6 +138,16 @@ RSpec.describe 'Instructor Project Rubric Request' do
       expect(project_rubric).to have_key(:error)
       expect(project_rubric[:error]).to eq("Couldn't find User with 'id'=999999")
       expect(response.status).to eq(404)
+    end
+
+    it "mod 4 cannot have project number that is not equal to 1" do
+      get "/api/v1/instructors/#{@instructor.id}/students/#{@student.id}/project_templates?mod=4&project_number=2"
+
+      project_rubric = JSON.parse(response.body, symbolize_names: true)
+
+      expect(project_rubric).to have_key(:error)
+      expect(project_rubric[:error]).to eq("Invalid parameters, mod 4 only has project_number 1")
+      expect(response.status).to eq(400)
     end
   end
 end

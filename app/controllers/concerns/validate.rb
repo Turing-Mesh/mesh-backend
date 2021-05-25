@@ -32,6 +32,10 @@ module Validate
     return true if (value.to_i < 0 || value.to_i > 4)
   end
 
+  def invalid_mod_project
+    params[:mod].to_i == 4 && params[:project_number].to_i != 1
+  end
+
   def missing_name_params(required)
     !required.all? {|key| params.has_key?(key)} ||
     (!params.has_key?(:first_name) && !params.has_key?(:last_name))
