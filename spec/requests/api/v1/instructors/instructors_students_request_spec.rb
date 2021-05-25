@@ -37,7 +37,7 @@ describe 'Instructor Students request' do
     it "should return bad data for missing query parameters" do
       get "/api/v1/instructors/#{@instructor.id}/students"
       json = JSON.parse(response.body, symbolize_names: true)
-      expect(json[:data]).to eq "Invalid Query Parameters"
+      expect(json[:error]).to eq "Invalid Query Parameters"
     end
 
     it "should be given a correct instructor id" do
