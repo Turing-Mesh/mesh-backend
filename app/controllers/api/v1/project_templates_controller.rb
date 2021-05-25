@@ -1,12 +1,16 @@
 class Api::V1::ProjectTemplatesController < ApplicationController
-  before_action :validate_mod, only: :index
-  before_action :validate_id, only: :index
-  before_action :validate_project, only: :index
+  before_action :validate_parameters, only: :index
 
   def index
-    student = User.find(params[:student_id])
-    instructor = User.find(params[:instructor_id])
-    project_rubric = ProjectRubric.new(params)
-    json_response(ProjectRubricSerializer.new(project_rubric))
+    return render_error("Required parameter missing") if missing_params(required_index)
+    return render_error("Invalid parameters, mod 4 only has project_number 1") if invalid_mod_project
+    project_rubric = ProjectRubric.new(params) if student && instructor
+    render_success(ProjectRubricSerializer.new(project_rubric))
+  end
+
+  private
+
+  def required_index
+    [:student_id, :instructor_id, :mod, :project_number]
   end
 end

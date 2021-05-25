@@ -37,13 +37,13 @@ describe 'Instructor Students request' do
     it "should return bad data for missing query parameters" do
       get "/api/v1/instructors/#{@instructor.id}/students"
       json = JSON.parse(response.body, symbolize_names: true)
-      expect(json[:data]).to eq "Invalid Query Parameters"
+      expect(json[:error]).to eq "Required parameter missing"
     end
 
     it "should be given a correct instructor id" do
       get "/api/v1/instructors/99999/students?mod=2"
       json = JSON.parse(response.body, symbolize_names: true)
-      expect(json[:error]).to eq "Couldn't find User with 'id'=99999"
+      expect(json[:error]).to eq "Couldn't find User"
     end
   end
 end

@@ -201,18 +201,18 @@ capstone_fe = FactoryBot.create(:project_template, mod: "4", project_number: "1"
 
 # Be 1 Mod 1 Project 1
 profiles_mod1_be.each do |student|
-  FactoryBot.create(:student_project, student_id: student, project_template_id: war_and_peace.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: battleship.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: black_thursday.id)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: war_and_peace.id, student_comments: nil)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: battleship.id, student_comments: nil)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: black_thursday.id, student_comments: nil)
 end
 profiles_mod2_be.each do |student|
   FactoryBot.create(:student_project, student_id: student, project_template_id: war_and_peace.id)
   FactoryBot.create(:student_project, student_id: student, project_template_id: battleship.id)
   FactoryBot.create(:student_project, student_id: student, project_template_id: black_thursday.id)
   FactoryBot.create(:student_project, student_id: student, project_template_id: enigma.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: relational.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: adopt.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: black_rails.id)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: relational.id, student_comments: nil)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: adopt.id, student_comments: nil)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: black_rails.id, student_comments: nil)
 end
 profiles_mod3_be.each do |student|
   FactoryBot.create(:student_project, student_id: student, project_template_id: war_and_peace.id)
@@ -223,9 +223,9 @@ profiles_mod3_be.each do |student|
   FactoryBot.create(:student_project, student_id: student, project_template_id: adopt.id)
   FactoryBot.create(:student_project, student_id: student, project_template_id: black_rails.id)
   FactoryBot.create(:student_project, student_id: student, project_template_id: discounts.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: viewing_party.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: black_api_edition.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: consultancy.id)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: viewing_party.id, student_comments: nil)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: black_api_edition.id, student_comments: nil)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: consultancy.id, student_comments: nil)
 end
 profiles_mod4_be.each do |student|
   FactoryBot.create(:student_project, student_id: student, project_template_id: war_and_peace.id)
@@ -238,15 +238,15 @@ profiles_mod4_be.each do |student|
   FactoryBot.create(:student_project, student_id: student, project_template_id: discounts.id)
   FactoryBot.create(:student_project, student_id: student, project_template_id: viewing_party.id)
   FactoryBot.create(:student_project, student_id: student, project_template_id: black_api_edition.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: consultancy.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: weather.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: capstone_be.id)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: consultancy.id, student_comments: nil)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: weather.id, student_comments: nil)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: capstone_be.id, student_comments: nil)
 end
 
 profiles_mod1_fe.each do |student|
-  FactoryBot.create(:student_project, student_id: student, project_template_id: js_fun_library.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: rom_com.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: intention.id)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: js_fun_library.id, student_comments: nil)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: rom_com.id, student_comments: nil)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: intention.id, student_comments: nil)
 end
 
 profiles_mod2_fe.each do |student|
@@ -254,9 +254,9 @@ profiles_mod2_fe.each do |student|
   FactoryBot.create(:student_project, student_id: student, project_template_id: rom_com.id)
   FactoryBot.create(:student_project, student_id: student, project_template_id: intention.id)
   FactoryBot.create(:student_project, student_id: student, project_template_id: tic_tac_toe.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: js_fun.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: fit.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: game_time.id)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: js_fun.id, student_comments: nil)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: fit.id, student_comments: nil)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: game_time.id, student_comments: nil)
 end
 
 profiles_mod3_fe.each do |student|
@@ -268,9 +268,9 @@ profiles_mod3_fe.each do |student|
   FactoryBot.create(:student_project, student_id: student, project_template_id: fit.id)
   FactoryBot.create(:student_project, student_id: student, project_template_id: game_time.id)
   FactoryBot.create(:student_project, student_id: student, project_template_id: travel_tracker.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: tomatillos.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: stretch.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: niche_audience.id)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: tomatillos.id, student_comments: nil)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: stretch.id, student_comments: nil)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: niche_audience.id, student_comments: nil)
 end
 
 profiles_mod4_fe.each do |student|
@@ -286,7 +286,7 @@ profiles_mod4_fe.each do |student|
   FactoryBot.create(:student_project, student_id: student, project_template_id: stretch.id)
   FactoryBot.create(:student_project, student_id: student, project_template_id: niche_audience.id)
   FactoryBot.create(:student_project, student_id: student, project_template_id: ideas.id)
-  FactoryBot.create(:student_project, student_id: student, project_template_id: capstone_fe.id)
+  FactoryBot.create(:student_project, student_id: student, project_template_id: capstone_fe.id, student_comments: nil)
 end
 
 be_instr_ids = [[122, 123, 124], [116, 117, 118], [112, 113], [106, 107, 108, 109]]
