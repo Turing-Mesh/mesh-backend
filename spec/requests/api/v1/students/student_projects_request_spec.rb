@@ -12,7 +12,7 @@ RSpec.describe 'Student projects request', type: :request do
         get "/api/v1/students/#{@student.id}/student_projects?mod=#{mod}"
 
         json = JSON.parse(response.body, symbolize_names:true)
-        
+
         expect(response).to be_successful
         expect(json).to be_a(Hash)
         expect(json[:data]).to be_a(Hash)
@@ -128,7 +128,7 @@ RSpec.describe 'Student projects request', type: :request do
 
       expect(response.status).to eq(400)
       expect(json[:error]).to be_a(String)
-      expect(json[:error]).to eq("Mod parameter is missing or invalid")
+      expect(json[:error]).to eq("Required parameter missing")
     end
 
     it "returns an error when the mod parameter is blank" do

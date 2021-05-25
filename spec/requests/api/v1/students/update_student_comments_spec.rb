@@ -15,7 +15,7 @@ RSpec.describe 'Student comments request', type: :request do
         patch "/api/v1/students/#{@student.id}/student_projects/#{@project_2.id}", headers: headers, params: params.to_json
 
         json = JSON.parse(response.body, symbolize_names:true)
-        
+
         @project_2.reload
         expect(@project_2.student_comments).to eq(params[:student_comments])
         expect(response).to be_successful
@@ -153,7 +153,7 @@ RSpec.describe 'Student comments request', type: :request do
 
         expect(response.status).to eq(400)
         expect(json[:error]).to be_a(String)
-        expect(json[:error]).to eq("Student comments missing, it must be included in request body")
+        expect(json[:error]).to eq("Required parameter missing")
       end
     end
   end
