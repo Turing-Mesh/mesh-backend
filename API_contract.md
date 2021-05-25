@@ -43,7 +43,7 @@ The request provides the projects for a valid matching student id and mod (sent 
             "is_final_project": false,
             "average_score": "2.75",
             "instructor_comments": "Some real good stuff.",
-            "student_comments": "My personal notes.",
+            "student_comments": ["My personal notes."],
             "project_feedback": [
               {
                 "id": "1",
@@ -136,14 +136,14 @@ The request updates the student project record with personal student comments th
 
   The following field is required in the post body request. If any required fields are missing or include invalid data an error will be returned (see [error handling](#error-handling)).
 
-  * student_comments = string
+  * student_comments = Array or null
 
 __** If existing student comments are removed please send a nil value.__
 
   Example json request body
   ```json
   {
-    "student_comments": "Me-Mow ate my homework. I swear!"
+    "student_comments": ["Me-Mow ate my homework. I swear!", "Seriously!"]
   }
   ```
 
@@ -165,7 +165,9 @@ Example json response
             "is_final_project": false,
             "average_score": "2.75",
             "instructor_comments": "Some real good stuff.",
-            "student_comments": "Me-Mow ate my homework. I swear!",
+            "student_comments": [
+              "Me-Mow ate my homework. I swear!", "Seriously!"
+            ],
             "project_feedback": [
               {
                 "id": "1",
@@ -205,8 +207,8 @@ Example json response
 The request provides the student's (name and id) for a given instructor who teaches a given module
 * __Required__
  * Mod query parameter must be included and have an integer value between 0-4. If the mod query parameter is missing, or is an invalid value an error is sent (see [error handling](#error-handling)).
- * Data is returned in ascending order by user_id.
- * Students are only returned when they lie within the given module request
+ * Data is returned in ascending order by first_name and then last_name of the student.
+ * Students are only returned when they lie within the given module request and are associated to that instructor.
 
  Example json response with projects
 
