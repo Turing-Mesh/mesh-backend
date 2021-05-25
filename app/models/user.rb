@@ -28,9 +28,6 @@ class User < ApplicationRecord
     .joins(:user_profile)
     .where('user_profiles.current_mod = ?', mod_num)
     .order('user_profiles.first_name, user_profiles.last_name')
-    # students.map do |student|
-    #   student.user_profile if student.user_profile.current_mod == mod_num
-    # end.compact
   end
 
 
