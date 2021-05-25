@@ -75,18 +75,27 @@ RSpec.describe User, type: :model do
   describe 'instance methods' do
     it "get_students" do
       instructor = User.create!(email: 'haegonorious@email.com', password: 'password', role: :instructor)
-      student = User.create!(email: 'bazzinni@email.com', password: 'password', role: :student)
-  
-      instructor_student = create(:instructor_student, instructor_id: instructor.id, student_id: student.id)
-      student_profile = create(:user_profile, user_id: student.id, current_mod: "2", starting_cohort: "2010", current_cohort: "2010", status: 0)
+      student_1 = User.create!(email: 'bazzinni@email.com', password: 'password', role: :student)
+      students = create_list(:user, 5, role: 0)
+
+      instructor_student = create(:instructor_student, instructor_id: instructor.id, student_id: student_1.id)
+      student_profile = create(:user_profile, user_id: student_1.id, current_mod: "2", starting_cohort: "2010", current_cohort: "2010", status: 0, first_name: 'Bazzinni')
+      n = 0
+      student_profiles = students[0..3].each do |student|
+        n = n +=1
+        create(:user_profile, user_id: student.id, current_mod: "2", starting_cohort: "2010", current_cohort: "2010", status: 0, first_name: "Name #{n}")
+        create(:instructor_student, instructor_id: instructor.id, student_id: student.id)
+      end
+      non_mod2_student = create(:user_profile, user_id: students.last.id, current_mod: "3", starting_cohort: "2010", current_cohort: "2010", status: 0)
       instructor_profile = create(:user_profile, user_id: instructor.id, current_mod: "2")
-  
-      expect(instructor.get_students("2").class).to eq Array
-      expect(instructor.get_students("2").first).to eq student_profile
-      expect(instructor.get_students("3")).to eq ([]) 
+
+      expect(instructor.get_students("2").count).to eq(5)
+      expect(instructor.get_students("2").first.first_name).to eq student_profile.first_name
+      expect(instructor.get_students("2").last.first_name).to eq students.fourth.user_profile.first_name
+      expect(instructor.get_students("3")).to eq ([])
 
     end
 
-    
+
   end
 end
