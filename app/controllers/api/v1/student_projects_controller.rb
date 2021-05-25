@@ -10,8 +10,6 @@ class Api::V1::StudentProjectsController < ApplicationController
   def update
     return render_error("Required parameter missing") if missing_params(required_update)
     project = StudentProject.find_by!(id: params[:id], student_id: params[:student_id])
-    # require "pry"; binding.pry
-    # student_comments = {student_comments: params[:student_comments].join("/2C/")}
     project.update(student_comments)
     params[:mod] = project.project_template.mod
     projects = Projects.new(params)

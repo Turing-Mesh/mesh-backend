@@ -35,6 +35,6 @@ class StudentProjects
   end
 
   def format_comments(data)
-    [data.split("/2C/")].to_a.flatten if !data.nil?
+    data.split("/2C/").to_a if !data.nil?
   end
 end

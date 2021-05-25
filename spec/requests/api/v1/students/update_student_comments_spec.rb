@@ -51,7 +51,7 @@ RSpec.describe 'Student comments request', type: :request do
         expect(@project_2.student_comments).to_not be_nil
         previous_comment = @project_2.student_comments
 
-        params = {student_comments: ["Me-Mow ate my homework. I swear!"]}
+        params = {student_comments: ["Me-Mow ate my homework. I swear!", "I cannot believe he did!", "He has been \npunished!"]}
         headers = {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
         patch "/api/v1/students/#{@student.id}/student_projects/#{@project_2.id}", headers: headers, params: params.to_json
 
@@ -59,7 +59,7 @@ RSpec.describe 'Student comments request', type: :request do
 
         @project_2.reload
         expect(@project_2.student_comments).to_not eq(previous_comment)
-        expect([@project_2.student_comments]).to eq(params[:student_comments])
+        expect(@project_2.student_comments.split("/2C/").to_a).to eq(params[:student_comments])
         expect(response).to be_successful
       end
 

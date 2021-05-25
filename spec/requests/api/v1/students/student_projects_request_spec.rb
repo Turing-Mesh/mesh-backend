@@ -44,7 +44,7 @@ RSpec.describe 'Student projects request', type: :request do
         check_hash_structure(project, :average_score, String)
         check_hash_structure(project, :instructor_comments, String)
         check_hash_structure(project, :student_comments, Array)
-        expect(project[:student_comments]).to eq([@project_2.student_comments.split("/2C/")].to_a.flatten)
+        expect(project[:student_comments]).to eq(@project_2.student_comments.split("/2C/").to_a)
       end
 
       it "the projects response for a valid request includes project feedback data" do
