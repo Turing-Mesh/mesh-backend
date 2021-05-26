@@ -5,7 +5,7 @@
 | HTTP verbs | Paths  | Used for | Output |
 | ---------- | ------ | -------- | ------:|
 | GET | /api/v1/students/:student_id/student_projects?mod=1 | Get all of the project feedback for single student and a single mod | [json](#student-projects-by-mod) |
-| PATCH | /api/v1/students/:student_id/student_projects/:id | Update student's project with personal comments | [json](#students-update-project) |
+| PATCH | /api/v1/students/:student_id/student_projects/:id | Update student's project with personal comments | [json](#update-student-project-comments) |
 | GET | /api/v1/instructors/:instructor_id/students?mod=1 | Get all of the student names and ids for instructor's current mod | [json](#instructor-module-students) |
 | POST | /api/v1/instructors/:instructor_id/students/search | Instructors search for student's by name  | [json](#instructor-students-search) |
 | GET | /api/v1/instructors/:instructor_id/students/:student_id/project_templates?mod=1&project_number=2 | Get a mod project template and rubric categories | [json](#student-project-rubric-categories) |
@@ -365,7 +365,7 @@ The request creates a student project record and related project feedback record
   }
   ```
 
-The response is the same as the [Student Projects By Mod](#student-projects-by-mod).
+The response is the same as the [Update Student Project Comment](#update-student-project-comments).
 
 ## Error Handling
 
