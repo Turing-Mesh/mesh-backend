@@ -16,6 +16,19 @@ class Api::V1::StudentProjectsController < ApplicationController
     render_success(ProjectsSerializer.new(projects))
   end
 
+  def create
+    return render_error("Required parameter missing") if missing_params(required_create)
+    project = StudentProject.new(student_project_params) if student && instructor
+    if project.save
+      ProjectFeedback.create_feedback(project, params) if !params[:project_feedback].nil?
+      params[:mod] = project.project_template.mod
+      params[:id] = project.id
+      projects = Projects.new(params)
+      render_success(ProjectsSerializer.new(projects))
+    else
+    end
+  end
+
   private
 
   def required_index
@@ -26,6 +39,11 @@ class Api::V1::StudentProjectsController < ApplicationController
     [:student_id, :id, :student_comments]
   end
 
+  def required_create
+    [:instructor_id, :student_id, :project_template_id, :instructor_comments,
+    :project_feedback]
+  end
+
   def student_comments
     if params[:student_comments].nil?
       {student_comments: params[:student_comments]}
@@ -34,5 +52,9 @@ class Api::V1::StudentProjectsController < ApplicationController
     else
       {student_comments: params[:student_comments][0]}
     end
+  end
+
+  def student_project_params
+    params.permit(:student_id, :project_template_id, :instructor_comments)
   end
 end

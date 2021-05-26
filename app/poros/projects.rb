@@ -12,7 +12,7 @@ class Projects
   private
 
   def get_student_projects(data)
-    if data[:student_comments]
+    if data[:student_comments] || data[:project_feedback]
       projects = StudentProject.where(id: data[:id], student_id: data[:student_id])
     else
       projects = StudentProject.student_projects_by_mod(@id, @mod.to_s)

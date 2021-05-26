@@ -1,6 +1,7 @@
 class ProjectTemplate < ApplicationRecord
   belongs_to :rubric_template
   has_many :student_projects
+  has_many :rubric_template_categories, through: :rubric_template
 
   validates :name, :mod, :program, :project_number, presence: true
 
