@@ -1,6 +1,6 @@
 # Welcome to Mesh!
 
-![](https://imgur.com/AoGl9AO.png)
+![](https://user-images.githubusercontent.com/72330302/119858371-a4f69d80-bed1-11eb-9de6-3bdfd70d8c51.png)
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
