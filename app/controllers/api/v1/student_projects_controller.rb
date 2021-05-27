@@ -24,8 +24,9 @@ class Api::V1::StudentProjectsController < ApplicationController
       params[:mod] = project.project_template.mod
       params[:id] = project.id
       projects = Projects.new(params)
+      EmailService.send_confirmation(student.email, project.id)
       render_success(ProjectsSerializer.new(projects))
-    else
+      
     end
   end
 
