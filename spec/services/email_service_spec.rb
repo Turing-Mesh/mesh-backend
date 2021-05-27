@@ -9,7 +9,7 @@ RSpec.describe 'Email Service', type: :request do
     json_body = File.read(Rails.root.join('spec/fixtures/email_fixture.json'))
     stub_request(:put, "https://powerful-garden-65640.herokuapp.com/api/v1/email").
     with(
-      body: "{\"to\":\"test@example.com\",\"subject\":\"Project Feedback\",\"content\":\"Your feedback for Awesome Project 2 has been submitted!\"}",
+      body: "{\"to\":\"test@example.com\",\"subject\":\"Project Feedback\",\"content\":\"Your feedback for #{@project_1.project_template.name} has been submitted!\"}",
       headers: {
      'Accept'=>'*/*',
      'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',

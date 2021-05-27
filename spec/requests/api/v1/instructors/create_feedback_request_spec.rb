@@ -41,6 +41,19 @@ RSpec.describe 'Instructor feedback request', type: :request do
                       }
                     ]
                   }
+
+    json_body = File.read(Rails.root.join('spec/fixtures/email_fixture.json'))
+    stub_request(:put, "https://powerful-garden-65640.herokuapp.com/api/v1/email").
+    with(
+      body: "{\"to\":\"#{@student.email}\",\"subject\":\"Project Feedback\",\"content\":\"Your feedback for #{@project_template_4.name} has been submitted!\"}",
+      headers: {
+     'Accept'=>'*/*',
+     'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+     'Content-Type'=>'application/json',
+     'User-Agent'=>'Faraday v1.4.1'
+      }).
+    to_return(status: 200, body: json_body, headers: {})
+
         headers = {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
         post "/api/v1/instructors/#{@instructor.id}/students/#{@student.id}/student_projects", headers: headers, params: params.to_json
 
