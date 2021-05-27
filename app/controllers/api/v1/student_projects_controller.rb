@@ -27,7 +27,6 @@ class Api::V1::StudentProjectsController < ApplicationController
       EmailService.send_confirmation(student.email, project.id)
       render_success(ProjectsSerializer.new(projects))
       
-    else
     end
   end
 
